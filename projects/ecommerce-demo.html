@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MAISON LUMIÈRE — Collection Printemps 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F5F0E8;
+    --sand: #E8DDD0;
+    --stone: #C4B5A0;
+    --bark: #7A6652;
+    --deep: #2C2218;
+    --accent: #B8860B;
+    --white: #FDFAF5;
+    --shadow: rgba(44,34,24,0.12);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--deep);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    position: fixed;
+    width: 10px; height: 10px;
+    background: var(--deep);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%,-50%);
+    transition: width .25s, height .25s, background .25s;
+  }
+  .cursor-ring {
+    position: fixed;
+    width: 36px; height: 36px;
+    border: 1px solid var(--bark);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%,-50%);
+    transition: all .15s ease-out;
+  }
+  body:has(a:hover) .cursor, body:has(button:hover) .cursor { width: 6px; height: 6px; background: var(--accent); }
+  body:has(a:hover) .cursor-ring, body:has(button:hover) .cursor-ring { width: 52px; height: 52px; border-color: var(--accent); }
+
+  /* Top announcement bar */
+  .announcement {
+    background: var(--deep);
+    color: var(--sand);
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 12px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    font-weight: 300;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--cream);
+    border-bottom: 1px solid var(--stone);
+    padding: 0 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 72px;
+    backdrop-filter: blur(12px);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    letter-spacing: 4px;
+    font-weight: 400;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--deep);
+  }
+  .nav-logo span { color: var(--accent); font-style: italic; }
+  .nav-links {
+    display: flex; gap: 40px; list-style: none;
+  }
+  .nav-links a {
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--bark);
+    font-weight: 400;
+    transition: color .2s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute; bottom: -3px; left: 0;
+    width: 0; height: 1px;
+    background: var(--accent);
+    transition: width .3s;
+  }
+  .nav-links a:hover { color: var(--deep); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-actions {
+    display: flex; align-items: center; gap: 24px;
+  }
+  .nav-actions svg { width: 20px; height: 20px; stroke: var(--bark); cursor: pointer; transition: stroke .2s; }
+  .nav-actions svg:hover { stroke: var(--deep); }
+  .cart-btn {
+    position: relative;
+    background: none; border: none; cursor: pointer; padding: 0;
+  }
+  .cart-count {
+    position: absolute; top: -6px; right: -8px;
+    background: var(--accent);
+    color: var(--white);
+    font-size: 9px;
+    font-weight: 500;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    letter-spacing: 0;
+  }
+
+  /* HERO */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: calc(100vh - 108px);
+  }
+  .hero-content {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 80px 80px 80px 120px;
+    position: relative;
+  }
+  .hero-content::before {
+    content: '2026';
+    position: absolute; top: 60px; left: 60px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    letter-spacing: 4px;
+    color: var(--stone);
+    text-transform: uppercase;
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp .8s .2s forwards;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 6vw, 82px);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--deep);
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp .8s .4s forwards;
+  }
+  .hero-title em { font-style: italic; color: var(--bark); }
+  .hero-desc {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--bark);
+    max-width: 380px;
+    margin-bottom: 48px;
+    font-weight: 300;
+    opacity: 0;
+    animation: fadeUp .8s .6s forwards;
+  }
+  .hero-ctas {
+    display: flex; gap: 20px; align-items: center;
+    opacity: 0;
+    animation: fadeUp .8s .8s forwards;
+  }
+  .btn-primary {
+    background: var(--deep);
+    color: var(--white);
+    border: none;
+    padding: 16px 40px;
+    font-size: 12px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    transition: background .3s, transform .2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--bark); transform: translateY(-2px); }
+  .btn-ghost {
+    background: transparent;
+    color: var(--bark);
+    border: none;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none;
+    transition: color .2s, gap .3s;
+  }
+  .btn-ghost::after { content: '→'; font-size: 16px; transition: transform .3s; }
+  .btn-ghost:hover { color: var(--deep); gap: 16px; }
+  .hero-visual {
+    position: relative;
+    overflow: hidden;
+    background: var(--sand);
+  }
+  .hero-img-container {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, #D4C5B2 0%, #C4A882 40%, #8B7355 100%);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .hero-product-mockup {
+    width: 65%;
+    position: relative;
+    z-index: 2;
+    animation: floatAnim 6s ease-in-out infinite;
+  }
+  .hero-product-mockup svg { width: 100%; filter: drop-shadow(0 40px 60px rgba(44,34,24,0.3)); }
+  .hero-badge {
+    position: absolute; bottom: 48px; left: 48px;
+    background: var(--white);
+    padding: 20px 28px;
+    z-index: 3;
+    animation: fadeUp .8s 1s both;
+    box-shadow: 0 8px 32px var(--shadow);
+  }
+  .hero-badge-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--stone); margin-bottom: 4px; }
+  .hero-badge-value { font-family: 'Cormorant Garamond', serif; font-size: 26px; color: var(--deep); font-weight: 300; }
+  .hero-tag {
+    position: absolute; top: 48px; right: 48px;
+    background: var(--accent);
+    color: var(--white);
+    padding: 10px 20px;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  /* STATS BAND */
+  .stats-band {
+    background: var(--deep);
+    color: var(--cream);
+    display: flex;
+    overflow: hidden;
+  }
+  .stat-item {
+    flex: 1;
+    padding: 40px 48px;
+    border-right: 1px solid rgba(255,255,255,.08);
+    text-align: center;
+    transition: background .3s;
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-item:hover { background: rgba(255,255,255,.04); }
+  .stat-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    font-weight: 300;
+    color: var(--sand);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .stat-number span { color: var(--accent); }
+  .stat-label { font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--stone); font-weight: 300; }
+
+  /* SECTION TITLES */
+  .section-header {
+    text-align: center;
+    padding: 80px 60px 48px;
+  }
+  .section-kicker {
+    font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--accent); font-weight: 500; margin-bottom: 16px;
+    display: block;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4vw, 54px);
+    font-weight: 300;
+    color: var(--deep);
+    line-height: 1.15;
+  }
+  .section-title em { font-style: italic; color: var(--bark); }
+  .divider {
+    width: 60px; height: 1px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    margin: 20px auto 0;
+  }
+
+  /* CATEGORIES */
+  .categories {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    padding: 0 60px 80px;
+  }
+  .cat-card {
+    position: relative;
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .cat-card:first-child { grid-row: span 2; aspect-ratio: auto; }
+  .cat-bg {
+    position: absolute; inset: 0;
+    transition: transform .6s cubic-bezier(.25,.46,.45,.94);
+  }
+  .cat-card:hover .cat-bg { transform: scale(1.06); }
+  .cat-bg-1 { background: linear-gradient(160deg, #C4A882, #7A6652); }
+  .cat-bg-2 { background: linear-gradient(160deg, #D4C5B2, #B8860B); }
+  .cat-bg-3 { background: linear-gradient(160deg, #E8DDD0, #C4B5A0); }
+  .cat-bg-4 { background: linear-gradient(160deg, #8B7355, #2C2218); }
+  .cat-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(44,34,24,.7) 0%, transparent 60%);
+  }
+  .cat-content {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 32px;
+  }
+  .cat-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--white);
+    margin-bottom: 8px;
+    line-height: 1.2;
+  }
+  .cat-count {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.6);
+  }
+  .cat-icon {
+    position: absolute; top: 32px; right: 32px;
+    width: 48px; height: 48px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  /* Category decorative elements */
+  .cat-deco {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 80px;
+    opacity: .12;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: var(--white);
+    transition: opacity .4s, font-size .4s;
+  }
+  .cat-card:hover .cat-deco { opacity: .2; font-size: 100px; }
+
+  /* PRODUCTS GRID */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    padding: 0 60px;
+  }
+  .product-card {
+    background: var(--white);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform .3s;
+  }
+  .product-card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px var(--shadow); }
+  .product-img {
+    aspect-ratio: 3/4;
+    position: relative;
+    overflow: hidden;
+  }
+  .product-img-bg {
+    position: absolute; inset: 0;
+    transition: transform .6s cubic-bezier(.25,.46,.45,.94);
+  }
+  .product-card:hover .product-img-bg { transform: scale(1.05); }
+  .p1 { background: linear-gradient(150deg, #E8DDD0 20%, #C4A882 100%); }
+  .p2 { background: linear-gradient(150deg, #D4C5B2 20%, #8B7355 100%); }
+  .p3 { background: linear-gradient(150deg, #C4B5A0 20%, #7A6652 100%); }
+  .p4 { background: linear-gradient(150deg, #F0E8DA 20%, #B8860B 100%); }
+  .p5 { background: linear-gradient(150deg, #DDD4C8 20%, #9B8570 100%); }
+  .p6 { background: linear-gradient(150deg, #E0D5C8 20%, #C4A882 100%); }
+  .p7 { background: linear-gradient(150deg, #CBBFB3 20%, #7A6652 100%); }
+  .p8 { background: linear-gradient(150deg, #EAE0D4 20%, #B8860B 100%); }
+
+  .product-item-icon {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 56px;
+    opacity: .18;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+  }
+  .product-badge {
+    position: absolute; top: 16px; left: 16px;
+    font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+    padding: 5px 12px; font-weight: 500;
+  }
+  .badge-new { background: var(--deep); color: var(--white); }
+  .badge-sale { background: var(--accent); color: var(--white); }
+  .badge-exclu { background: var(--bark); color: var(--white); }
+
+  .product-actions-overlay {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: linear-gradient(to top, rgba(44,34,24,.85), transparent);
+    padding: 24px 20px 20px;
+    transform: translateY(100%);
+    transition: transform .3s ease;
+    display: flex; gap: 8px;
+  }
+  .product-card:hover .product-actions-overlay { transform: translateY(0); }
+  .btn-cart {
+    flex: 1;
+    background: var(--white);
+    color: var(--deep);
+    border: none;
+    padding: 10px;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    transition: background .2s, color .2s;
+  }
+  .btn-cart:hover { background: var(--accent); color: var(--white); }
+  .btn-wish {
+    width: 40px;
+    background: rgba(255,255,255,.15);
+    border: 1px solid rgba(255,255,255,.3);
+    color: var(--white);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background .2s;
+    flex-shrink: 0;
+  }
+  .btn-wish:hover { background: rgba(255,255,255,.3); }
+  .btn-wish svg { width: 16px; height: 16px; }
+
+  .product-info { padding: 20px 20px 24px; }
+  .product-brand {
+    font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--stone); margin-bottom: 6px; font-weight: 400;
+  }
+  .product-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px; font-weight: 400;
+    color: var(--deep); margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  .product-price-row {
+    display: flex; align-items: center; gap: 10px;
+  }
+  .price-current {
+    font-size: 16px; font-weight: 500;
+    color: var(--deep);
+  }
+  .price-original {
+    font-size: 13px; text-decoration: line-through;
+    color: var(--stone);
+  }
+  .price-discount {
+    font-size: 11px; color: var(--accent); font-weight: 500;
+    margin-left: auto;
+  }
+  .product-rating {
+    display: flex; align-items: center; gap: 4px;
+    margin-top: 8px;
+  }
+  .stars { color: var(--accent); font-size: 11px; letter-spacing: 1px; }
+  .rating-count { font-size: 11px; color: var(--stone); }
+
+  /* FEATURE STRIP */
+  .feature-strip {
+    background: var(--sand);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin: 80px 60px;
+    border: 1px solid rgba(122,102,82,.2);
+  }
+  .feature-item {
+    padding: 40px 36px;
+    border-right: 1px solid rgba(122,102,82,.2);
+    display: flex; align-items: flex-start; gap: 20px;
+    transition: background .3s;
+  }
+  .feature-item:last-child { border-right: none; }
+  .feature-item:hover { background: rgba(122,102,82,.08); }
+  .feature-ico {
+    width: 44px; height: 44px;
+    border: 1px solid var(--bark);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .feature-ico svg { width: 20px; height: 20px; stroke: var(--bark); }
+  .feature-text-title { font-size: 13px; font-weight: 500; color: var(--deep); margin-bottom: 6px; letter-spacing: .5px; }
+  .feature-text-desc { font-size: 12px; color: var(--bark); line-height: 1.6; font-weight: 300; }
+
+  /* EDITORIAL BANNER */
+  .editorial {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 0 60px 80px;
+    overflow: hidden;
+    min-height: 480px;
+  }
+  .editorial-visual {
+    background: linear-gradient(135deg, #2C2218 0%, #7A6652 60%, #B8860B 100%);
+    position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .editorial-pattern {
+    position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(255,255,255,.03) 30px, rgba(255,255,255,.03) 31px);
+  }
+  .editorial-visual-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 120px;
+    font-style: italic;
+    font-weight: 300;
+    color: rgba(255,255,255,.08);
+    position: absolute;
+    white-space: nowrap;
+    line-height: 1;
+  }
+  .editorial-content {
+    background: var(--deep);
+    color: var(--cream);
+    padding: 72px 64px;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .editorial-kicker {
+    font-size: 10px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--accent); font-weight: 500; margin-bottom: 24px;
+  }
+  .editorial-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 46px; font-weight: 300;
+    line-height: 1.1; margin-bottom: 24px;
+    color: var(--sand);
+  }
+  .editorial-title em { font-style: italic; color: var(--stone); }
+  .editorial-text {
+    font-size: 14px; line-height: 1.9;
+    color: var(--stone); font-weight: 300; margin-bottom: 40px;
+  }
+  .btn-light {
+    background: transparent;
+    color: var(--cream);
+    border: 1px solid rgba(245,240,232,.3);
+    padding: 14px 36px;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    align-self: flex-start;
+    transition: background .3s, border-color .3s;
+    text-decoration: none;
+  }
+  .btn-light:hover { background: rgba(245,240,232,.1); border-color: rgba(245,240,232,.5); }
+
+  /* TESTIMONIALS */
+  .testimonials-section { padding: 80px 60px; background: var(--white); }
+  .testimonials-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 48px;
+  }
+  .testimonial-card {
+    background: var(--cream);
+    padding: 40px 36px;
+    position: relative;
+    transition: background .3s;
+  }
+  .testimonial-card:hover { background: var(--sand); }
+  .testimonial-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 64px; line-height: .8;
+    color: var(--accent); opacity: .4;
+    margin-bottom: 20px;
+    font-weight: 300;
+  }
+  .testimonial-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px; font-style: italic;
+    line-height: 1.7; color: var(--deep);
+    margin-bottom: 28px; font-weight: 300;
+  }
+  .testimonial-author { display: flex; align-items: center; gap: 14px; }
+  .author-avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px; color: var(--white); font-style: italic;
+  }
+  .av1 { background: linear-gradient(135deg, #C4A882, #7A6652); }
+  .av2 { background: linear-gradient(135deg, #B8860B, #7A6652); }
+  .av3 { background: linear-gradient(135deg, #8B7355, #2C2218); }
+  .author-name { font-size: 13px; font-weight: 500; color: var(--deep); }
+  .author-location { font-size: 11px; color: var(--stone); margin-top: 2px; letter-spacing: 1px; }
+  .testimonial-stars { color: var(--accent); font-size: 13px; letter-spacing: 2px; margin-bottom: 16px; }
+
+  /* NEWSLETTER */
+  .newsletter {
+    background: var(--deep);
+    display: grid; grid-template-columns: 1fr 1fr;
+    margin: 0 60px 80px;
+  }
+  .newsletter-content { padding: 72px 64px; }
+  .newsletter-kicker { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; display: block; }
+  .newsletter-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40px; font-weight: 300; color: var(--sand); line-height: 1.2; margin-bottom: 16px;
+  }
+  .newsletter-title em { font-style: italic; }
+  .newsletter-desc { font-size: 14px; color: var(--stone); font-weight: 300; line-height: 1.7; margin-bottom: 36px; }
+  .newsletter-form { display: flex; gap: 0; }
+  .newsletter-input {
+    flex: 1;
+    background: rgba(255,255,255,.07);
+    border: 1px solid rgba(255,255,255,.12);
+    border-right: none;
+    color: var(--cream);
+    padding: 14px 20px;
+    font-size: 13px;
+    font-family: 'DM Sans', sans-serif;
+    outline: none;
+    transition: border-color .2s;
+  }
+  .newsletter-input::placeholder { color: var(--bark); }
+  .newsletter-input:focus { border-color: var(--accent); }
+  .newsletter-btn {
+    background: var(--accent);
+    color: var(--white);
+    border: none;
+    padding: 14px 28px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    transition: background .2s;
+    white-space: nowrap;
+  }
+  .newsletter-btn:hover { background: var(--bark); }
+  .newsletter-visual {
+    background: linear-gradient(135deg, rgba(184,134,11,.15), rgba(122,102,82,.15));
+    display: flex; align-items: center; justify-content: center;
+    padding: 40px;
+    position: relative; overflow: hidden;
+  }
+  .newsletter-deco {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 180px;
+    font-style: italic;
+    font-weight: 300;
+    color: rgba(255,255,255,.04);
+    position: absolute;
+    user-select: none;
+  }
+  .newsletter-perks { display: flex; flex-direction: column; gap: 20px; z-index: 1; }
+  .perk {
+    display: flex; align-items: center; gap: 16px;
+    color: var(--sand);
+  }
+  .perk-ico { width: 36px; height: 36px; border: 1px solid rgba(184,134,11,.4); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .perk-ico svg { width: 16px; height: 16px; stroke: var(--accent); }
+  .perk-text { font-size: 13px; font-weight: 300; line-height: 1.5; }
+  .perk-text strong { display: block; font-weight: 500; font-size: 14px; margin-bottom: 2px; }
+
+  /* FOOTER */
+  footer {
+    background: var(--deep);
+    color: var(--sand);
+    padding: 72px 120px 40px;
+  }
+  .footer-top {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; padding-bottom: 56px;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+  }
+  .footer-brand-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px; letter-spacing: 4px; text-transform: uppercase;
+    font-weight: 300; color: var(--sand); margin-bottom: 20px;
+    text-decoration: none; display: block;
+  }
+  .footer-brand-name span { color: var(--accent); font-style: italic; }
+  .footer-tagline { font-size: 13px; color: var(--bark); font-weight: 300; line-height: 1.7; max-width: 280px; margin-bottom: 32px; }
+  .footer-socials { display: flex; gap: 12px; }
+  .social-btn {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(255,255,255,.12);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: border-color .2s, background .2s;
+  }
+  .social-btn:hover { border-color: var(--accent); background: rgba(184,134,11,.1); }
+  .social-btn svg { width: 16px; height: 16px; stroke: var(--stone); }
+  .footer-col-title {
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--accent); font-weight: 500; margin-bottom: 24px;
+  }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  .footer-links a {
+    text-decoration: none; font-size: 13px; color: var(--bark);
+    font-weight: 300; transition: color .2s; letter-spacing: .3px;
+  }
+  .footer-links a:hover { color: var(--sand); }
+  .footer-bottom {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-top: 32px;
+  }
+  .footer-copy { font-size: 11px; color: var(--bark); font-weight: 300; letter-spacing: .5px; }
+  .footer-payments { display: flex; gap: 8px; align-items: center; }
+  .payment-badge {
+    background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+    padding: 5px 12px; font-size: 10px; letter-spacing: 1px;
+    color: var(--stone); text-transform: uppercase; font-weight: 500;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes floatAnim {
+    0%, 100% { transform: translateY(0) rotate(-2deg); }
+    50% { transform: translateY(-16px) rotate(2deg); }
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--cream); }
+  ::-webkit-scrollbar-thumb { background: var(--stone); }
+  ::-webkit-scrollbar-thumb:hover { background: var(--bark); }
+
+  /* Scroll reveal */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* Mobile */
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-content { padding: 60px 24px; }
+    .hero-visual { height: 50vw; min-height: 300px; }
+    .categories { grid-template-columns: 1fr 1fr; padding: 0 24px 60px; }
+    .cat-card:first-child { grid-row: span 1; }
+    .products-grid { grid-template-columns: 1fr 1fr; padding: 0 24px; }
+    .feature-strip { grid-template-columns: 1fr 1fr; margin: 40px 24px; }
+    .editorial { grid-template-columns: 1fr; margin: 0 24px 60px; }
+    .editorial-visual { height: 200px; }
+    .testimonials-section { padding: 60px 24px; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .newsletter { grid-template-columns: 1fr; margin: 0 24px 60px; }
+    .newsletter-visual { display: none; }
+    footer { padding: 60px 24px 32px; }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+    .stats-band { flex-wrap: wrap; }
+    .stat-item { min-width: 50%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Announcement -->
+<div class="announcement">Livraison offerte dès 150€ d'achat &nbsp;·&nbsp; Retours gratuits 30 jours &nbsp;·&nbsp; Paiement en 3× sans frais</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Maison <span>Lumière</span></a>
+  <ul class="nav-links">
+    <li><a href="#">Nouveautés</a></li>
+    <li><a href="#">Collections</a></li>
+    <li><a href="#">Bijoux</a></li>
+    <li><a href="#">Maison</a></li>
+    <li><a href="#">Éditions limitées</a></li>
+    <li><a href="#">À propos</a></li>
+  </ul>
+  <div class="nav-actions">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+    </svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+    </svg>
+    <button class="cart-btn" onclick="addToCart()">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/>
+        <path d="M16 10a4 4 0 0 1-8 0"/>
+      </svg>
+      <span class="cart-count" id="cartCount">2</span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <p class="hero-eyebrow">Collection Printemps 2026</p>
+    <h1 class="hero-title">
+      L'élégance<br>dans ses<br><em>détails.</em>
+    </h1>
+    <p class="hero-desc">Des pièces conçues pour durer, pensées pour vous distinguer. Matières nobles, savoir-faire artisanal, esthétique intemporelle.</p>
+    <div class="hero-ctas">
+      <a href="#" class="btn-primary">Découvrir la collection</a>
+      <a href="#" class="btn-ghost">Voir les nouveautés</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="hero-img-container">
+      <div class="hero-product-mockup">
+        <svg viewBox="0 0 320 420" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="bagGrad" cx="40%" cy="35%">
+              <stop offset="0%" stop-color="#F5EDD8"/>
+              <stop offset="60%" stop-color="#C4A882"/>
+              <stop offset="100%" stop-color="#7A6652"/>
+            </radialGradient>
+            <radialGradient id="shadowGrad" cx="50%" cy="50%">
+              <stop offset="0%" stop-color="rgba(44,34,24,.4)"/>
+              <stop offset="100%" stop-color="rgba(44,34,24,0)"/>
+            </radialGradient>
+          </defs>
+          <!-- Shadow -->
+          <ellipse cx="160" cy="405" rx="100" ry="12" fill="url(#shadowGrad)"/>
+          <!-- Main bag body -->
+          <rect x="40" y="120" width="240" height="260" rx="8" fill="url(#bagGrad)"/>
+          <!-- Flap -->
+          <path d="M40 120 Q40 60 160 60 Q280 60 280 120 L280 200 Q160 240 40 200 Z" fill="#D4B896"/>
+          <path d="M55 115 Q55 70 160 70 Q265 70 265 115 L265 195 Q160 232 55 195 Z" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1"/>
+          <!-- Clasp -->
+          <rect x="140" y="188" width="40" height="28" rx="4" fill="#B8860B"/>
+          <rect x="152" y="194" width="16" height="16" rx="2" fill="#C9971C"/>
+          <circle cx="160" cy="202" r="4" fill="#B8860B"/>
+          <!-- Handles -->
+          <path d="M100 120 Q100 70 130 60" fill="none" stroke="#8B6B4A" stroke-width="12" stroke-linecap="round"/>
+          <path d="M220 120 Q220 70 190 60" fill="none" stroke="#8B6B4A" stroke-width="12" stroke-linecap="round"/>
+          <!-- Stitching details -->
+          <rect x="55" y="135" width="210" height="230" rx="4" fill="none" stroke="rgba(255,255,255,.12)" stroke-width="1" stroke-dasharray="6 4"/>
+          <!-- Logo area -->
+          <text x="160" y="300" text-anchor="middle" font-family="Georgia, serif" font-size="13" font-style="italic" fill="rgba(255,255,255,.35)" letter-spacing="3">MAISON LUMIÈRE</text>
+        </svg>
+      </div>
+    </div>
+    <div class="hero-tag">Nouvelle Saison</div>
+    <div class="hero-badge">
+      <div class="hero-badge-label">À partir de</div>
+      <div class="hero-badge-value">285 €</div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-band">
+  <div class="stat-item reveal">
+    <div class="stat-number">12<span>k+</span></div>
+    <div class="stat-label">Clients satisfaits</div>
+  </div>
+  <div class="stat-item reveal">
+    <div class="stat-number">340<span>+</span></div>
+    <div class="stat-label">Références en stock</div>
+  </div>
+  <div class="stat-item reveal">
+    <div class="stat-number">98<span>%</span></div>
+    <div class="stat-label">Avis positifs</div>
+  </div>
+  <div class="stat-item reveal">
+    <div class="stat-number">15<span>ans</span></div>
+    <div class="stat-label">D'expertise artisanale</div>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<div class="section-header reveal">
+  <span class="section-kicker">Explorer</span>
+  <h2 class="section-title">Nos <em>univers</em></h2>
+  <div class="divider"></div>
+</div>
+
+<div class="categories">
+  <div class="cat-card">
+    <div class="cat-bg cat-bg-1"></div>
+    <div class="cat-deco">M</div>
+    <div class="cat-overlay"></div>
+    <div class="cat-content">
+      <div class="cat-name">Maroquinerie<br>& Accessoires</div>
+      <div class="cat-count">84 pièces</div>
+    </div>
+  </div>
+  <div class="cat-card">
+    <div class="cat-bg cat-bg-2"></div>
+    <div class="cat-deco">B</div>
+    <div class="cat-overlay"></div>
+    <div class="cat-content">
+      <div class="cat-name">Bijoux fins</div>
+      <div class="cat-count">127 pièces</div>
+    </div>
+  </div>
+  <div class="cat-card">
+    <div class="cat-bg cat-bg-3"></div>
+    <div class="cat-deco">P</div>
+    <div class="cat-overlay"></div>
+    <div class="cat-content">
+      <div class="cat-name">Parfumerie</div>
+      <div class="cat-count">42 fragrances</div>
+    </div>
+  </div>
+  <div class="cat-card">
+    <div class="cat-bg cat-bg-4"></div>
+    <div class="cat-deco">D</div>
+    <div class="cat-overlay"></div>
+    <div class="cat-content">
+      <div class="cat-name">Décoration</div>
+      <div class="cat-count">91 objets</div>
+    </div>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<div class="section-header reveal">
+  <span class="section-kicker">Sélection</span>
+  <h2 class="section-title">Coups de <em>cœur</em></h2>
+  <div class="divider"></div>
+</div>
+
+<div class="products-grid">
+
+  <div class="product-card reveal">
+    <div class="product-img">
+      <div class="product-img-bg p1"></div>
+      <div class="product-item-icon">S</div>
+      <span class="product-badge badge-new">Nouveau</span>
+      <div class="product-actions-overlay">
+        <button class="btn-cart" onclick="addToCart()">Ajouter au panier</button>
+        <button class="btn-wish"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      </div>
+    </div>
+    <div class="product-info">
+      <div class="product-brand">Maison Lumière</div>
+      <div class="product-name">Sac Ambre Cuir pleine fleur</div>
+      <div class="product-price-row">
+        <span class="price-current">485 €</span>
+      </div>
+      <div class="product-rating">
+        <span class="stars">★★★★★</span>
+        <span class="rating-count">(48)</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card reveal">
+    <div class="product-img">
+      <div class="product-img-bg p2"></div>
+      <div class="product-item-icon">C</div>
+      <span class="product-badge badge-sale">−20%</span>
+      <div class="product-actions-overlay">
+        <button class="btn-cart" onclick="addToCart()">Ajouter au panier</button>
+        <button class="btn-wish"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      </div>
+    </div>
+    <div class="product-info">
+      <div class="product-brand">Collection Or</div>
+      <div class="product-name">Collier Céleste Or 18 carats</div>
+      <div class="product-price-row">
+        <span class="price-current">312 €</span>
+        <span class="price-original">390 €</span>
+        <span class="price-discount">−20%</span>
+      </div>
+      <div class="product-rating">
+        <span class="stars">★★★★★</span>
+        <span class="rating-count">(92)</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card reveal">
+    <div class="product-img">
+      <div class="product-img-bg p3"></div>
+      <div class="product-item-icon">P</div>
+      <span class="product-badge badge-exclu">Exclusif</span>
+      <div class="product-actions-overlay">
+        <button class="btn-cart" onclick="addToCart()">Ajouter au panier</button>
+        <button class="btn-wish"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      </div>
+    </div>
+    <div class="product-info">
+      <div class="product-brand">Parfumerie</div>
+      <div class="product-name">Eau de Parfum Nuit Dorée 75ml</div>
+      <div class="product-price-row">
+        <span class="price-current">195 €</span>
+      </div>
+      <div class="product-rating">
+        <span class="stars">★★★★☆</span>
+        <span class="rating-count">(37)</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card reveal">
+    <div class="product-img">
+      <div class="product-img-bg p4"></div>
+      <div class="product-item-icon">F</div>
+      <span class="product-badge badge-new">Nouveau</span>
+      <div class="product-actions-overlay">
+        <button class="btn-cart" onclick="addToCart()">Ajouter au panier</button>
+        <button class="btn-wish"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      </div>
+    </div>
+    <div class="product-info">
+      <div class="product-brand">Art de vivre</div>
+      <div class="product-name">Foulard en soie Jardin Botanique</div>
+      <div class="product-price-row">
+        <span class="price-current">220 €</span>
+      </div>
+      <div class="product-rating">
+        <span class="stars">★★★★★</span>
+        <span class="rating-count">(64)</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card reveal">
+    <div class="product-img">
+      <div class="product-img-bg p5"></div>
+      <div class="product-item-icon">B</div>
+      <div class="product-actions-overlay">
+        <button class="btn-cart" onclick="addToCart()">Ajouter au panier</button>
+        <button class="btn-wish"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      </div>
+    </div>
+    <div class="product-info">
+      <div class="product-brand">Maroquinerie</div>
+      <div class="product-name">Porte-monnaie Brise Grain veau</div>
+      <div class="product-price-row">
+        <span class="price-current">145 €</span>
+      </div>
+      <div class="product-rating">
+        <span class="stars">★★★★☆</span>
+        <span class="rating-count">(29)</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card reveal">
+    <div class="product-img">
+      <div class="product-img-bg p6"></div>
+      <div class="product-item-icon">V</div>
+      <span class="product-badge badge-sale">−15%</span>
+      <div class="product-actions-overlay">
+        <button class="btn-cart" onclick="addToCart()">Ajouter au panier</button>
+        <button class="btn-wish"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      </div>
+    </div>
+    <div class="product-info">
+      <div class="product-brand">Décoration</div>
+      <div class="product-name">Vase Aube Céramique artisanale</div>
+      <div class="product-price-row">
+        <span class="price-current">170 €</span>
+        <span class="price-original">200 €</span>
+        <span class="price-discount">−15%</span>
+      </div>
+      <div class="product-rating">
+        <span class="stars">★★★★★</span>
+        <span class="rating-count">(18)</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card reveal">
+    <div class="product-img">
+      <div class="product-img-bg p7"></div>
+      <div class="product-item-icon">B</div>
+      <span class="product-badge badge-exclu">Exclusif</span>
+      <div class="product-actions-overlay">
+        <button class="btn-cart" onclick="addToCart()">Ajouter au panier</button>
+        <button class="btn-wish"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      </div>
+    </div>
+    <div class="product-info">
+      <div class="product-brand">Collection Or</div>
+      <div class="product-name">Bracelet Solstice Diamants & Or blanc</div>
+      <div class="product-price-row">
+        <span class="price-current">890 €</span>
+      </div>
+      <div class="product-rating">
+        <span class="stars">★★★★★</span>
+        <span class="rating-count">(11)</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-card reveal">
+    <div class="product-img">
+      <div class="product-img-bg p8"></div>
+      <div class="product-item-icon">C</div>
+      <div class="product-actions-overlay">
+        <button class="btn-cart" onclick="addToCart()">Ajouter au panier</button>
+        <button class="btn-wish"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></button>
+      </div>
+    </div>
+    <div class="product-info">
+      <div class="product-brand">Art de vivre</div>
+      <div class="product-name">Carnet Lumine Cuir façonné main</div>
+      <div class="product-price-row">
+        <span class="price-current">95 €</span>
+      </div>
+      <div class="product-rating">
+        <span class="stars">★★★★☆</span>
+        <span class="rating-count">(55)</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FEATURES -->
+<div class="feature-strip">
+  <div class="feature-item reveal">
+    <div class="feature-ico">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+      </svg>
+    </div>
+    <div>
+      <div class="feature-text-title">Livraison offerte</div>
+      <div class="feature-text-desc">Dès 150€ d'achat, livraison express en 24–48h partout en France</div>
+    </div>
+  </div>
+  <div class="feature-item reveal">
+    <div class="feature-ico">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+      </svg>
+    </div>
+    <div>
+      <div class="feature-text-title">Retours 30 jours</div>
+      <div class="feature-text-desc">Retournez vos articles gratuitement sous 30 jours, sans condition</div>
+    </div>
+  </div>
+  <div class="feature-item reveal">
+    <div class="feature-ico">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+      </svg>
+    </div>
+    <div>
+      <div class="feature-text-title">Paiement sécurisé</div>
+      <div class="feature-text-desc">Cryptage SSL 256 bits, 3D Secure et paiement en 3× sans frais</div>
+    </div>
+  </div>
+  <div class="feature-item reveal">
+    <div class="feature-ico">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 16 19.79 19.79 0 0 1 1.61 7.44 2 2 0 0 1 3.58 5.25h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 12.1A16 16 0 0 0 12 16.19l.9-.9a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 19.73 17.67z"/>
+      </svg>
+    </div>
+    <div>
+      <div class="feature-text-title">Service client 7j/7</div>
+      <div class="feature-text-desc">Nos conseillers dédiés répondent à toutes vos questions par chat, mail ou téléphone</div>
+    </div>
+  </div>
+</div>
+
+<!-- EDITORIAL -->
+<div class="editorial reveal">
+  <div class="editorial-visual">
+    <div class="editorial-pattern"></div>
+    <div class="editorial-visual-text">Artisan</div>
+  </div>
+  <div class="editorial-content">
+    <div class="editorial-kicker">Notre engagement</div>
+    <h2 class="editorial-title">Chaque pièce,<br>une <em>histoire</em><br>à part entière.</h2>
+    <p class="editorial-text">Depuis 2009, nous collaborons avec des artisans d'exception pour créer des objets qui traversent les modes. Nos ateliers partenaires, implantés en France, Italie et Portugal, perpétuent des savoir-faire centenaires dans le respect des matières et de ceux qui les travaillent.</p>
+    <a href="#" class="btn-light">Découvrir notre histoire</a>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section reveal">
+  <div class="section-header" style="padding-top:0">
+    <span class="section-kicker">Témoignages</span>
+    <h2 class="section-title">Ils nous font <em>confiance</em></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="testimonial-quote">"</div>
+      <div class="testimonial-stars">★★★★★</div>
+      <div class="testimonial-text">Un sac commandé il y a 3 ans et qui est toujours aussi beau. La qualité est vraiment au rendez-vous, le cuir a juste pris une patine magnifique.</div>
+      <div class="testimonial-author">
+        <div class="author-avatar av1">S</div>
+        <div>
+          <div class="author-name">Sophie M.</div>
+          <div class="author-location">Paris · Cliente fidèle</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-quote">"</div>
+      <div class="testimonial-stars">★★★★★</div>
+      <div class="testimonial-text">Le service client est exceptionnel. J'avais une question sur la taille d'un bijou, on m'a rappelé en moins de 10 minutes avec des conseils très personnalisés.</div>
+      <div class="testimonial-author">
+        <div class="author-avatar av2">L</div>
+        <div>
+          <div class="author-name">Lucas D.</div>
+          <div class="author-location">Lyon · 1ère commande</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-quote">"</div>
+      <div class="testimonial-stars">★★★★★</div>
+      <div class="testimonial-text">L'emballage était digne d'un grand luxe. Un cadeau pour ma femme qui a été totalement conquise dès l'ouverture de la boîte. On reviendra sans hésiter.</div>
+      <div class="testimonial-author">
+        <div class="author-avatar av3">A</div>
+        <div>
+          <div class="author-name">Antoine R.</div>
+          <div class="author-location">Bordeaux · 4 commandes</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<div class="newsletter reveal">
+  <div class="newsletter-content">
+    <span class="newsletter-kicker">La lettre Lumière</span>
+    <h2 class="newsletter-title">Restez dans<br>notre <em>univers</em></h2>
+    <p class="newsletter-desc">Recevez en avant-première nos nouvelles collections, nos éditions limitées et nos invitations exclusives.</p>
+    <div class="newsletter-form">
+      <input type="email" class="newsletter-input" placeholder="votre@email.com">
+      <button class="newsletter-btn">S'abonner</button>
+    </div>
+  </div>
+  <div class="newsletter-visual">
+    <div class="newsletter-deco">ML</div>
+    <div class="newsletter-perks">
+      <div class="perk">
+        <div class="perk-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="perk-text"><strong>Accès prioritaire</strong>Ventes privées & avant-premières exclusives</div>
+      </div>
+      <div class="perk">
+        <div class="perk-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <div class="perk-text"><strong>Offre de bienvenue</strong>−10% sur votre première commande</div>
+      </div>
+      <div class="perk">
+        <div class="perk-ico">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="perk-text"><strong>Inspirations curatives</strong>Lookbooks, conseils style & tendances</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <a href="#" class="footer-brand-name">Maison <span>Lumière</span></a>
+      <p class="footer-tagline">Des objets de caractère façonnés avec soin, pour celles et ceux qui refusent de choisir entre beauté et durabilité.</p>
+      <div class="footer-socials">
+        <div class="social-btn"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
+        <div class="social-btn"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></div>
+        <div class="social-btn"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg></div>
+        <div class="social-btn"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigation</div>
+      <ul class="footer-links">
+        <li><a href="#">Nouveautés</a></li>
+        <li><a href="#">Collections</a></li>
+        <li><a href="#">Bijoux</a></li>
+        <li><a href="#">Maroquinerie</a></li>
+        <li><a href="#">Parfumerie</a></li>
+        <li><a href="#">Décoration</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Informations</div>
+      <ul class="footer-links">
+        <li><a href="#">À propos</a></li>
+        <li><a href="#">Nos ateliers</a></li>
+        <li><a href="#">Engagements</a></li>
+        <li><a href="#">Presse</a></li>
+        <li><a href="#">Carrières</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Aide & Service</div>
+      <ul class="footer-links">
+        <li><a href="#">Livraison</a></li>
+        <li><a href="#">Retours & échanges</a></li>
+        <li><a href="#">Taille & guide</a></li>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Mentions légales</a></li>
+        <li><a href="#">CGV</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Maison Lumière — Tous droits réservés</div>
+    <div class="footer-payments">
+      <div class="payment-badge">Visa</div>
+      <div class="payment-badge">Mastercard</div>
+      <div class="payment-badge">Amex</div>
+      <div class="payment-badge">PayPal</div>
+      <div class="payment-badge">Apple Pay</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  function animCursor() {
+    cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+    rx += (mx - rx) * .12; ry += (my - ry) * .12;
+    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    requestAnimationFrame(animCursor);
+  }
+  animCursor();
+
+  // Cart counter
+  let cartItems = 2;
+  function addToCart() {
+    cartItems++;
+    const el = document.getElementById('cartCount');
+    el.textContent = cartItems;
+    el.style.transform = 'scale(1.5)';
+    setTimeout(() => el.style.transform = 'scale(1)', 200);
+    el.style.transition = 'transform .2s';
+  }
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 60);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => io.observe(r));
+
+  // Newsletter submit
+  document.querySelector('.newsletter-btn').addEventListener('click', function() {
+    const input = document.querySelector('.newsletter-input');
+    if(input.value) {
+      this.textContent = '✓ Merci !';
+      this.style.background = '#7A6652';
+      input.value = '';
+      setTimeout(() => { this.textContent = "S'abonner"; this.style.background = ''; }, 3000);
+    }
+  });
+</script>
+
+<!-- Back to portfolio -->
+<a href="../index.html" style="position:fixed;bottom:24px;left:24px;z-index:9999;display:inline-flex;align-items:center;gap:8px;padding:0.6rem 1.2rem;border-radius:100px;background:rgba(0,0,0,0.8);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.15);color:#fff;font-size:0.82rem;font-weight:600;text-decoration:none;">&#8592; Portfolio</a>
+</body>
+</html>

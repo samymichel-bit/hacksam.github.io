@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Zangalewe Bar-Lounge Restaurant – Une expérience gastronomique unique à Yaoundé, Bastos. Restaurant haut de gamme, fine dining, cocktails et ambiance lounge au cœur de Bastos.">
+<meta name="keywords" content="restaurant Yaoundé, Bastos restaurant, restaurant haut de gamme Cameroun, fine dining Yaoundé, bar lounge Yaoundé, Zangalewe, Medom Palace">
+<meta property="og:title" content="Zangalewe Bar-Lounge Restaurant – Yaoundé, Bastos">
+<meta property="og:description" content="Fine dining, cocktails signature et ambiance lounge exclusive à Bastos, Yaoundé.">
+<title>Zangalewe Bar-Lounge Restaurant | Bastos, Yaoundé</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --noir: #0a0905;
+    --noir-soft: #111008;
+    --or: #c9a84c;
+    --or-light: #e2c47a;
+    --or-pale: #f0dca0;
+    --beige: #e8dcc8;
+    --beige-dark: #b5a68a;
+    --creme: #f5f0e8;
+    --text-light: #d4c9b0;
+    --text-muted: #7a7060;
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'Josefin Sans', sans-serif;
+    --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--noir);
+    color: var(--text-light);
+    font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 15px;
+    letter-spacing: 0.04em;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: var(--or); color: var(--noir); }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--noir); }
+  ::-webkit-scrollbar-thumb { background: var(--or); border-radius: 2px; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5vw;
+    height: 80px;
+    transition: background var(--transition), backdrop-filter var(--transition);
+  }
+  nav.scrolled {
+    background: rgba(10,9,5,0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--or);
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    line-height: 1.1;
+  }
+  .nav-logo span { display: block; font-size: 0.55rem; font-weight: 200; letter-spacing: 0.25em; color: var(--beige-dark); font-family: var(--font-body); text-transform: uppercase; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    color: var(--text-light); text-decoration: none;
+    font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+    transition: color var(--transition);
+    position: relative;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px;
+    background: var(--or); transition: width var(--transition);
+  }
+  .nav-links a:hover { color: var(--or); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-reserve {
+    background: transparent; border: 1px solid var(--or);
+    color: var(--or); padding: 10px 22px;
+    font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+    cursor: pointer; transition: all var(--transition); text-decoration: none;
+  }
+  .nav-reserve:hover { background: var(--or); color: var(--noir); }
+
+  /* Burger */
+  .burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 5px; }
+  .burger span { display: block; width: 24px; height: 1px; background: var(--or); transition: all var(--transition); }
+  .burger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .burger.open span:nth-child(2) { opacity: 0; }
+  .burger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+  .mobile-menu {
+    display: none; position: fixed; top: 80px; left: 0; right: 0; z-index: 99;
+    background: rgba(10,9,5,0.98); backdrop-filter: blur(20px);
+    padding: 2rem 5vw; border-bottom: 1px solid rgba(201,168,76,0.15);
+  }
+  .mobile-menu.open { display: block; }
+  .mobile-menu ul { list-style: none; display: flex; flex-direction: column; gap: 1.5rem; }
+  .mobile-menu a { color: var(--text-light); text-decoration: none; font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; }
+
+  /* ── HERO ── */
+  #accueil {
+    position: relative; height: 100vh; min-height: 600px;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 60% 40%, rgba(201,168,76,0.06) 0%, transparent 60%),
+      linear-gradient(160deg, #0a0905 0%, #151208 40%, #0d0c08 100%);
+  }
+  /* Animated gold particles */
+  .hero-bg::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(circle, rgba(201,168,76,0.15) 1px, transparent 1px),
+      radial-gradient(circle, rgba(201,168,76,0.08) 1px, transparent 1px);
+    background-size: 80px 80px, 40px 40px;
+    background-position: 0 0, 20px 20px;
+    animation: particleFloat 20s linear infinite;
+    opacity: 0.4;
+  }
+  @keyframes particleFloat {
+    0% { transform: translateY(0) translateX(0); }
+    100% { transform: translateY(-80px) translateX(20px); }
+  }
+
+  /* Decorative frame lines */
+  .hero-frame {
+    position: absolute; inset: 40px;
+    border: 1px solid rgba(201,168,76,0.12);
+    pointer-events: none;
+  }
+  .hero-frame::before, .hero-frame::after {
+    content: '';
+    position: absolute; width: 60px; height: 60px;
+  }
+  .hero-frame::before { top: -1px; left: -1px; border-top: 1px solid var(--or); border-left: 1px solid var(--or); }
+  .hero-frame::after { bottom: -1px; right: -1px; border-bottom: 1px solid var(--or); border-right: 1px solid var(--or); }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    text-align: center; padding: 0 5vw;
+    animation: heroReveal 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  }
+  @keyframes heroReveal {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow {
+    font-size: 0.65rem; letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--or); font-family: var(--font-body); font-weight: 200;
+    margin-bottom: 1.5rem;
+    animation: heroReveal 1.4s 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  }
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 9vw, 7.5rem);
+    font-weight: 300;
+    line-height: 0.95;
+    color: var(--beige);
+    letter-spacing: -0.01em;
+    margin-bottom: 0.3em;
+    animation: heroReveal 1.4s 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  }
+  .hero-title em { font-style: italic; color: var(--or-light); }
+  .hero-subtitle {
+    font-family: var(--font-display);
+    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+    font-weight: 300; font-style: italic;
+    color: var(--text-muted);
+    margin-bottom: 3rem;
+    animation: heroReveal 1.4s 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  }
+  .hero-divider {
+    width: 80px; height: 1px; background: linear-gradient(to right, transparent, var(--or), transparent);
+    margin: 0 auto 2.5rem;
+    animation: heroReveal 1.4s 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  }
+  .hero-cta {
+    display: inline-flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
+    animation: heroReveal 1.4s 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  }
+  .btn-primary {
+    background: var(--or); color: var(--noir);
+    padding: 15px 36px; border: none; cursor: pointer;
+    font-family: var(--font-body); font-size: 0.65rem; font-weight: 400;
+    letter-spacing: 0.25em; text-transform: uppercase; text-decoration: none;
+    transition: all var(--transition);
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--or-pale); transform: translateY(-2px); box-shadow: 0 20px 40px rgba(201,168,76,0.25); }
+  .btn-ghost {
+    background: transparent; color: var(--beige-dark);
+    padding: 14px 36px; border: 1px solid rgba(201,168,76,0.3); cursor: pointer;
+    font-family: var(--font-body); font-size: 0.65rem; font-weight: 300;
+    letter-spacing: 0.25em; text-transform: uppercase; text-decoration: none;
+    transition: all var(--transition); display: inline-block;
+  }
+  .btn-ghost:hover { border-color: var(--or); color: var(--or); }
+
+  .hero-scroll {
+    position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--text-muted); animation: heroReveal 1.4s 1s both;
+  }
+  .hero-scroll::after {
+    content: ''; width: 1px; height: 50px;
+    background: linear-gradient(to bottom, var(--or), transparent);
+    animation: scrollLine 2s ease-in-out infinite;
+  }
+  @keyframes scrollLine { 0%,100% { transform: scaleY(1); opacity:1; } 50% { transform: scaleY(0.5); opacity:0.4; } }
+
+  /* Visual restaurant cards in hero */
+  .hero-cards {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    display: flex; gap: 2px;
+    height: 160px; overflow: hidden;
+    mask-image: linear-gradient(to top, transparent 0%, black 60%);
+    opacity: 0.35;
+    animation: heroReveal 2s 0.8s both;
+  }
+  .hero-card {
+    flex: 1; overflow: hidden;
+  }
+  .hero-card div {
+    width: 100%; height: 100%;
+    transition: transform 8s ease;
+  }
+  .hero-card:hover div { transform: scale(1.05); }
+
+  /* Food images using CSS gradients as placeholders */
+  .img-dining {
+    background: linear-gradient(135deg, #1a160e 0%, #2d2415 40%, #1a160e 100%),
+      repeating-linear-gradient(45deg, rgba(201,168,76,0.03) 0, rgba(201,168,76,0.03) 1px, transparent 0, transparent 50%);
+    background-blend-mode: normal;
+    position: relative;
+  }
+  .img-dining::after {
+    content: '🍽️';
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    font-size: 2rem; opacity: 0.3;
+  }
+
+  /* ── SECTION BASE ── */
+  section { padding: 120px 5vw; }
+  .section-label {
+    font-size: 0.6rem; letter-spacing: 0.4em; text-transform: uppercase;
+    color: var(--or); font-family: var(--font-body); font-weight: 200;
+    margin-bottom: 1rem; display: block;
+  }
+  .section-title {
+    font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.8rem);
+    font-weight: 300; line-height: 1.1; color: var(--beige);
+    margin-bottom: 1.5rem;
+  }
+  .section-title em { font-style: italic; color: var(--or-light); }
+  .section-body {
+    font-size: 0.88rem; line-height: 1.9; color: var(--text-muted);
+    max-width: 560px;
+  }
+  .gold-line {
+    width: 60px; height: 1px;
+    background: linear-gradient(to right, var(--or), transparent);
+    margin-bottom: 2rem;
+  }
+
+  /* ── ABOUT ── */
+  #apropos { background: var(--noir-soft); position: relative; overflow: hidden; }
+  #apropos::before {
+    content: 'ZANGALEWE';
+    position: absolute; right: -2vw; top: 50%; transform: translateY(-50%) rotate(90deg);
+    font-family: var(--font-display); font-size: clamp(5rem, 12vw, 10rem);
+    color: rgba(201,168,76,0.03); font-weight: 600; letter-spacing: 0.1em;
+    pointer-events: none; white-space: nowrap;
+  }
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; align-items: center;
+    max-width: 1200px; margin: 0 auto;
+  }
+  .about-visual {
+    position: relative; aspect-ratio: 4/5;
+  }
+  .about-visual-main {
+    width: 100%; height: 85%;
+    background: linear-gradient(160deg, #1c180f, #2a2010);
+    position: relative; overflow: hidden;
+  }
+  .about-visual-main::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 30% 70%, rgba(201,168,76,0.12) 0%, transparent 50%),
+      linear-gradient(180deg, transparent 60%, rgba(10,9,5,0.5) 100%);
+  }
+  /* Restaurant ambiance illustration */
+  .about-visual-main::after {
+    content: '✦';
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 4rem; color: rgba(201,168,76,0.12);
+    animation: spin 20s linear infinite;
+  }
+  @keyframes spin { from { transform: translate(-50%,-50%) rotate(0deg); } to { transform: translate(-50%,-50%) rotate(360deg); } }
+
+  .about-visual-accent {
+    position: absolute; bottom: 0; right: -20px;
+    width: 55%; aspect-ratio: 1;
+    background: linear-gradient(135deg, #241e12, #1a160b);
+    border: 1px solid rgba(201,168,76,0.15);
+  }
+  .about-visual-accent::after {
+    content: '';
+    position: absolute; inset: 12px;
+    border: 1px solid rgba(201,168,76,0.08);
+  }
+  .about-label-box {
+    position: absolute; bottom: 15%; left: -30px;
+    background: var(--or); color: var(--noir);
+    padding: 18px 22px;
+    font-family: var(--font-display); font-size: 1.8rem; font-weight: 600;
+    line-height: 1; z-index: 2;
+  }
+  .about-label-box span { display: block; font-family: var(--font-body); font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase; margin-top: 3px; }
+
+  .about-features {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1.5rem; margin-top: 3rem;
+  }
+  .feature-item {
+    padding: 1.2rem; border: 1px solid rgba(201,168,76,0.12);
+    transition: border-color var(--transition), background var(--transition);
+  }
+  .feature-item:hover { border-color: rgba(201,168,76,0.3); background: rgba(201,168,76,0.03); }
+  .feature-icon { font-size: 1.2rem; margin-bottom: 0.5rem; opacity: 0.7; }
+  .feature-title { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--or); margin-bottom: 0.3rem; }
+  .feature-text { font-size: 0.78rem; color: var(--text-muted); line-height: 1.6; }
+
+  /* ── MENU ── */
+  #menu {
+    background: linear-gradient(180deg, var(--noir) 0%, var(--noir-soft) 100%);
+    position: relative;
+  }
+  .menu-header { text-align: center; margin-bottom: 70px; }
+  .menu-header .section-body { margin: 0 auto; text-align: center; }
+  .menu-tabs {
+    display: flex; justify-content: center; gap: 0;
+    margin-bottom: 60px; border: 1px solid rgba(201,168,76,0.15);
+    max-width: 500px; margin-left: auto; margin-right: auto;
+    overflow: hidden;
+  }
+  .menu-tab {
+    flex: 1; padding: 14px 20px; background: transparent;
+    border: none; cursor: pointer;
+    font-family: var(--font-body); font-size: 0.65rem;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-muted);
+    transition: all var(--transition);
+    border-right: 1px solid rgba(201,168,76,0.15);
+  }
+  .menu-tab:last-child { border-right: none; }
+  .menu-tab.active, .menu-tab:hover { background: var(--or); color: var(--noir); }
+
+  .menu-panel { display: none; }
+  .menu-panel.active { display: block; }
+
+  .menu-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1px; background: rgba(201,168,76,0.08);
+    max-width: 1200px; margin: 0 auto;
+  }
+  .menu-item {
+    background: var(--noir); padding: 2rem 2.5rem;
+    transition: background var(--transition);
+    display: flex; flex-direction: column;
+  }
+  .menu-item:hover { background: rgba(201,168,76,0.04); }
+  .menu-item-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.6rem; }
+  .menu-item-name {
+    font-family: var(--font-display); font-size: 1.15rem; font-weight: 400;
+    color: var(--beige); line-height: 1.2; flex: 1; padding-right: 1rem;
+  }
+  .menu-item-price {
+    font-family: var(--font-display); font-size: 1.1rem; font-weight: 300;
+    color: var(--or); white-space: nowrap;
+  }
+  .menu-item-desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.7; }
+  .menu-item-tag {
+    display: inline-block; margin-top: 0.8rem;
+    font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--or); border: 1px solid rgba(201,168,76,0.25);
+    padding: 3px 8px; align-self: flex-start;
+  }
+
+  .menu-cta { text-align: center; margin-top: 4rem; }
+
+  /* ── GALLERY ── */
+  #galerie { background: var(--noir); padding: 120px 0; }
+  .gallery-header { padding: 0 5vw; margin-bottom: 60px; }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: 240px 240px;
+    gap: 3px;
+    padding: 0 5vw;
+  }
+  .gallery-item {
+    overflow: hidden; position: relative; cursor: pointer;
+  }
+  .gallery-item:nth-child(1) { grid-column: 1 / 5; grid-row: 1 / 3; }
+  .gallery-item:nth-child(2) { grid-column: 5 / 8; grid-row: 1 / 2; }
+  .gallery-item:nth-child(3) { grid-column: 8 / 13; grid-row: 1 / 2; }
+  .gallery-item:nth-child(4) { grid-column: 5 / 9; grid-row: 2 / 3; }
+  .gallery-item:nth-child(5) { grid-column: 9 / 13; grid-row: 2 / 3; }
+
+  .gallery-inner {
+    width: 100%; height: 100%;
+    transition: transform 0.6s ease;
+    position: relative;
+  }
+  .gallery-item:hover .gallery-inner { transform: scale(1.05); }
+
+  .gallery-inner::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(10,9,5,0.6) 0%, transparent 50%);
+    opacity: 0; transition: opacity var(--transition);
+  }
+  .gallery-item:hover .gallery-inner::after { opacity: 1; }
+
+  /* Gallery images with styled gradients */
+  .g1 { background: linear-gradient(160deg, #1f1a0e 0%, #2e2515 50%, #1a1409 100%); }
+  .g2 { background: linear-gradient(135deg, #0e1219 0%, #141c2a 50%, #0a0e14 100%); }
+  .g3 { background: linear-gradient(160deg, #1a0e0e 0%, #281515 50%, #150a0a 100%); }
+  .g4 { background: linear-gradient(135deg, #12100a 0%, #1e1b10 50%, #0e0d08 100%); }
+  .g5 { background: linear-gradient(160deg, #0e1218 0%, #151e2a 50%, #0a0e16 100%); }
+
+  .gallery-caption {
+    position: absolute; bottom: 1rem; left: 1rem; right: 1rem;
+    font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--or-pale); opacity: 0; z-index: 2;
+    transition: opacity var(--transition);
+  }
+  .gallery-item:hover .gallery-caption { opacity: 1; }
+
+  /* SVG-based decorative food illustrations */
+  .gallery-inner svg { width: 100%; height: 100%; opacity: 0.12; }
+
+  /* ── EVENTS/LOUNGE ── */
+  #ambiance {
+    background: var(--noir-soft);
+    position: relative; overflow: hidden;
+  }
+  .ambiance-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 100%, rgba(201,168,76,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .ambiance-grid {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 1px; background: rgba(201,168,76,0.08);
+    margin-top: 60px; max-width: 1200px; margin-left: auto; margin-right: auto;
+  }
+  .ambiance-card {
+    background: var(--noir-soft); padding: 3rem 2.5rem;
+    text-align: center; transition: background var(--transition);
+    position: relative; overflow: hidden;
+  }
+  .ambiance-card::before {
+    content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 60%; height: 1px; background: linear-gradient(to right, transparent, var(--or), transparent);
+    opacity: 0; transition: opacity var(--transition);
+  }
+  .ambiance-card:hover { background: rgba(201,168,76,0.03); }
+  .ambiance-card:hover::before { opacity: 1; }
+  .ambiance-icon { font-size: 2rem; margin-bottom: 1.5rem; display: block; }
+  .ambiance-title {
+    font-family: var(--font-display); font-size: 1.4rem; font-weight: 400;
+    color: var(--beige); margin-bottom: 1rem;
+  }
+  .ambiance-text { font-size: 0.8rem; color: var(--text-muted); line-height: 1.8; }
+  .ambiance-tag {
+    display: inline-block; margin-top: 1.5rem;
+    font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--or);
+  }
+
+  /* ── REVIEWS ── */
+  #avis { background: var(--noir); }
+  .reviews-header { text-align: center; margin-bottom: 60px; }
+  .reviews-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1px; background: rgba(201,168,76,0.08);
+    max-width: 1200px; margin: 0 auto;
+  }
+  .review-card {
+    background: var(--noir); padding: 2.5rem;
+    transition: background var(--transition);
+  }
+  .review-card:hover { background: rgba(201,168,76,0.03); }
+  .review-stars { color: var(--or); font-size: 0.8rem; letter-spacing: 0.15em; margin-bottom: 1.2rem; }
+  .review-text {
+    font-family: var(--font-display); font-size: 1.05rem; font-weight: 300; font-style: italic;
+    color: var(--beige); line-height: 1.7; margin-bottom: 1.5rem;
+  }
+  .review-author { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); }
+  .review-author span { color: var(--or); margin-right: 6px; }
+
+  /* ── RESERVATION ── */
+  #reservation {
+    background: linear-gradient(160deg, var(--noir-soft) 0%, var(--noir) 100%);
+    position: relative; overflow: hidden;
+  }
+  #reservation::before {
+    content: ''; position: absolute; top: -50%; right: -20%;
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,168,76,0.04) 0%, transparent 70%);
+  }
+  .reservation-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; max-width: 1200px; margin: 0 auto; align-items: start;
+  }
+  .reservation-info { padding-top: 1rem; }
+  .res-detail {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding: 1.2rem 0; border-bottom: 1px solid rgba(201,168,76,0.1);
+  }
+  .res-detail-icon { color: var(--or); font-size: 1rem; margin-top: 2px; flex-shrink: 0; }
+  .res-detail-title { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--or); margin-bottom: 0.3rem; }
+  .res-detail-text { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+
+  .reservation-form { position: relative; z-index: 1; }
+  .form-title {
+    font-family: var(--font-display); font-size: 1.8rem; font-weight: 300;
+    color: var(--beige); margin-bottom: 2rem;
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { margin-bottom: 1rem; }
+  .form-label {
+    display: block; font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--or); margin-bottom: 0.5rem;
+  }
+  .form-input, .form-select {
+    width: 100%; padding: 13px 16px;
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(201,168,76,0.2);
+    color: var(--text-light); font-family: var(--font-body); font-size: 0.82rem;
+    transition: border-color var(--transition), background var(--transition);
+    outline: none; appearance: none;
+  }
+  .form-input::placeholder { color: var(--text-muted); }
+  .form-input:focus, .form-select:focus {
+    border-color: var(--or); background: rgba(201,168,76,0.04);
+  }
+  .form-select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c9a84c' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; cursor: pointer; }
+  .form-select option { background: #111008; }
+  .form-submit {
+    width: 100%; padding: 16px; margin-top: 0.5rem;
+    background: var(--or); border: none; cursor: pointer;
+    font-family: var(--font-body); font-size: 0.7rem; font-weight: 400;
+    letter-spacing: 0.25em; text-transform: uppercase; color: var(--noir);
+    transition: all var(--transition);
+  }
+  .form-submit:hover { background: var(--or-pale); transform: translateY(-2px); box-shadow: 0 15px 30px rgba(201,168,76,0.2); }
+  .form-note { font-size: 0.7rem; color: var(--text-muted); margin-top: 1rem; text-align: center; }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--noir-soft); }
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 80px; max-width: 1200px; margin: 0 auto;
+  }
+  .map-container {
+    border: 1px solid rgba(201,168,76,0.15);
+    overflow: hidden; position: relative; height: 400px;
+  }
+  .map-container iframe { width: 100%; height: 100%; border: none; filter: grayscale(100%) contrast(1.2) brightness(0.7) sepia(20%); }
+  .map-overlay {
+    position: absolute; bottom: 0; left: 0; right: 0; padding: 1.2rem;
+    background: linear-gradient(to top, rgba(10,9,5,0.9) 0%, transparent 100%);
+  }
+  .map-label { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--or); }
+
+  .contact-info { padding-top: 0.5rem; }
+  .contact-item {
+    display: flex; gap: 1.2rem; align-items: flex-start;
+    padding: 1.5rem 0; border-bottom: 1px solid rgba(201,168,76,0.1);
+  }
+  .contact-icon { color: var(--or); font-size: 1.1rem; margin-top: 2px; flex-shrink: 0; width: 24px; text-align: center; }
+  .contact-label { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--or); margin-bottom: 0.4rem; }
+  .contact-value { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; }
+  .contact-value a { color: var(--text-light); text-decoration: none; transition: color var(--transition); }
+  .contact-value a:hover { color: var(--or); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--noir); border-top: 1px solid rgba(201,168,76,0.1);
+    padding: 60px 5vw 40px;
+  }
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px; margin-bottom: 50px;
+    max-width: 1200px; margin-left: auto; margin-right: auto;
+  }
+  .footer-logo {
+    font-family: var(--font-display); font-size: 1.6rem; font-weight: 600;
+    color: var(--or); letter-spacing: 0.05em; margin-bottom: 1rem;
+  }
+  .footer-desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 1.5rem; }
+  .footer-social { display: flex; gap: 0.8rem; }
+  .social-btn {
+    width: 36px; height: 36px; border: 1px solid rgba(201,168,76,0.2);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--text-muted); font-size: 0.8rem; cursor: pointer;
+    transition: all var(--transition); text-decoration: none;
+  }
+  .social-btn:hover { border-color: var(--or); color: var(--or); background: rgba(201,168,76,0.05); }
+  .footer-heading { font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--or); margin-bottom: 1.5rem; }
+  .footer-links { list-style: none; }
+  .footer-links li { margin-bottom: 0.8rem; }
+  .footer-links a { font-size: 0.78rem; color: var(--text-muted); text-decoration: none; transition: color var(--transition); }
+  .footer-links a:hover { color: var(--or); }
+  .footer-bottom {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 30px; border-top: 1px solid rgba(201,168,76,0.08);
+    font-size: 0.7rem; color: var(--text-muted);
+    max-width: 1200px; margin: 0 auto;
+  }
+  .footer-bottom span { color: var(--or); }
+
+  /* ── WHATSAPP BUTTON ── */
+  .whatsapp-btn {
+    position: fixed; bottom: 28px; right: 28px; z-index: 99;
+    width: 56px; height: 56px; border-radius: 50%;
+    background: #25D366; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 8px 30px rgba(37,211,102,0.35);
+    cursor: pointer; transition: transform var(--transition), box-shadow var(--transition);
+    text-decoration: none;
+  }
+  .whatsapp-btn:hover { transform: scale(1.1); box-shadow: 0 12px 40px rgba(37,211,102,0.5); }
+  .whatsapp-btn svg { width: 28px; height: 28px; fill: white; }
+  .whatsapp-pulse {
+    position: absolute; inset: -4px; border-radius: 50%;
+    border: 2px solid rgba(37,211,102,0.4);
+    animation: pulse 2s ease-out infinite;
+  }
+  @keyframes pulse { 0% { transform: scale(1); opacity: 0.6; } 100% { transform: scale(1.5); opacity: 0; } }
+
+  /* ── ANIMATIONS ── */
+  .fade-in {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+  .fade-in-left {
+    opacity: 0; transform: translateX(-30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .fade-in-left.visible { opacity: 1; transform: translateX(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    .about-grid { grid-template-columns: 1fr; gap: 50px; }
+    .about-visual { aspect-ratio: 16/9; max-height: 400px; }
+    .about-visual-main { height: 100%; }
+    .about-label-box { left: 20px; bottom: 20px; }
+    .gallery-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: repeat(3, 200px);
+    }
+    .gallery-item:nth-child(1) { grid-column: 1 / 2; grid-row: 1 / 3; }
+    .gallery-item:nth-child(2) { grid-column: 2 / 3; grid-row: 1 / 2; }
+    .gallery-item:nth-child(3) { grid-column: 2 / 3; grid-row: 2 / 3; }
+    .gallery-item:nth-child(4) { grid-column: 1 / 2; grid-row: 3 / 4; }
+    .gallery-item:nth-child(5) { grid-column: 2 / 3; grid-row: 3 / 4; }
+    .ambiance-grid { grid-template-columns: 1fr; }
+    .reservation-grid { grid-template-columns: 1fr; gap: 50px; }
+    .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+  }
+  @media (max-width: 768px) {
+    .nav-links, .nav-reserve { display: none; }
+    .burger { display: flex; }
+    section { padding: 80px 5vw; }
+    .about-features { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+    .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+    .gallery-grid { padding: 0 5vw; grid-template-columns: 1fr; grid-template-rows: repeat(5, 180px); }
+    .gallery-item { grid-column: auto !important; grid-row: auto !important; }
+    .menu-tabs { max-width: 100%; }
+    .menu-tab { font-size: 0.6rem; padding: 12px 10px; letter-spacing: 0.1em; }
+    .hero-cards { display: none; }
+    .hero-frame { inset: 20px; }
+  }
+  @media (max-width: 480px) {
+    .hero-title { font-size: 2.5rem; }
+  }
+
+  /* ── FORM SUCCESS ── */
+  .form-success {
+    display: none; padding: 1.5rem; border: 1px solid rgba(201,168,76,0.3);
+    background: rgba(201,168,76,0.05); text-align: center;
+    color: var(--or); font-size: 0.82rem;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#accueil" class="nav-logo">Zangalewe<span>Bar · Lounge · Restaurant</span></a>
+  <ul class="nav-links">
+    <li><a href="#apropos">À propos</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#galerie">Galerie</a></li>
+    <li><a href="#ambiance">Ambiance</a></li>
+    <li><a href="#avis">Avis</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#reservation" class="nav-reserve">Réserver</a>
+  <div class="burger" id="burger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="#apropos" onclick="closeMobile()">À propos</a></li>
+    <li><a href="#menu" onclick="closeMobile()">Menu</a></li>
+    <li><a href="#galerie" onclick="closeMobile()">Galerie</a></li>
+    <li><a href="#ambiance" onclick="closeMobile()">Ambiance</a></li>
+    <li><a href="#avis" onclick="closeMobile()">Avis clients</a></li>
+    <li><a href="#reservation" onclick="closeMobile()">Réservation</a></li>
+    <li><a href="#contact" onclick="closeMobile()">Contact</a></li>
+  </ul>
+</div>
+
+<!-- HERO -->
+<section id="accueil">
+  <div class="hero-bg"></div>
+  <div class="hero-frame"></div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow">✦ Résidence Medom Palace · Bastos, Yaoundé ✦</p>
+    <h1 class="hero-title">Zanga<em>lewe</em></h1>
+    <p class="hero-subtitle">Une expérience gastronomique unique à Yaoundé</p>
+    <div class="hero-divider"></div>
+    <div class="hero-cta">
+      <a href="#reservation" class="btn-primary">Réserver une table</a>
+      <a href="#menu" class="btn-ghost">Découvrir le menu</a>
+    </div>
+  </div>
+
+  <div class="hero-cards">
+    <div class="hero-card"><div class="g1"></div></div>
+    <div class="hero-card"><div class="g2"></div></div>
+    <div class="hero-card"><div class="g3"></div></div>
+    <div class="hero-card"><div class="g4"></div></div>
+    <div class="hero-card"><div class="g5"></div></div>
+  </div>
+
+  <div class="hero-scroll">Découvrir</div>
+</section>
+
+<!-- À PROPOS -->
+<section id="apropos">
+  <div class="about-grid">
+    <div class="about-visual fade-in-left">
+      <div class="about-visual-main"></div>
+      <div class="about-visual-accent"></div>
+      <div class="about-label-box">2016<span>Fondé à Bastos</span></div>
+    </div>
+    <div>
+      <span class="section-label fade-in">Notre Histoire</span>
+      <div class="gold-line fade-in"></div>
+      <h2 class="section-title fade-in">L'Art de Recevoir,<br><em>à l'Africaine</em></h2>
+      <p class="section-body fade-in">Niché au cœur du quartier diplomatique de Bastos, le Zangalewe Bar-Lounge Restaurant est une invitation à l'excellence culinaire. Dans un cadre somptueux mêlant raffinement contemporain et chaleur africaine, nous vous proposons une cuisine internationale d'exception, des cocktails signatures et une ambiance lounge inoubliable.</p>
+      <p class="section-body fade-in" style="margin-top:1rem;">Situé au sein de la Résidence Hôtelière Medom Palace, notre établissement accueille une clientèle d'exception : diplomates, expatriés, hommes d'affaires et épicuriens à la recherche d'une expérience gastronomique hors du commun à Yaoundé.</p>
+      <div class="about-features">
+        <div class="feature-item fade-in">
+          <div class="feature-icon">🍽️</div>
+          <div class="feature-title">Fine Dining</div>
+          <div class="feature-text">Cuisine internationale élaborée par des chefs passionnés</div>
+        </div>
+        <div class="feature-item fade-in">
+          <div class="feature-icon">🍸</div>
+          <div class="feature-title">Bar Lounge</div>
+          <div class="feature-text">Cocktails signatures et sélection de vins d'exception</div>
+        </div>
+        <div class="feature-item fade-in">
+          <div class="feature-icon">🎵</div>
+          <div class="feature-title">Live Music</div>
+          <div class="feature-text">Soirées musicales et ambiance feutrée les week-ends</div>
+        </div>
+        <div class="feature-item fade-in">
+          <div class="feature-icon">📍</div>
+          <div class="feature-title">Bastos Premium</div>
+          <div class="feature-text">Quartier diplomatique, cœur de Yaoundé</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section id="menu">
+  <div class="menu-header">
+    <span class="section-label">Notre Carte</span>
+    <div class="gold-line" style="margin:0 auto;background:linear-gradient(to right,transparent,var(--or),transparent);"></div>
+    <h2 class="section-title">Une <em>Cuisine</em> d'Exception</h2>
+    <p class="section-body">Des saveurs du monde entier, sublimées par notre chef, avec une touche de terroir camerounais.</p>
+  </div>
+
+  <div class="menu-tabs">
+    <button class="menu-tab active" onclick="switchTab('entrees')">Entrées</button>
+    <button class="menu-tab" onclick="switchTab('plats')">Plats</button>
+    <button class="menu-tab" onclick="switchTab('boissons')">Boissons</button>
+    <button class="menu-tab" onclick="switchTab('desserts')">Desserts</button>
+  </div>
+
+  <!-- ENTRÉES -->
+  <div class="menu-panel active" id="entrees">
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Carpaccio de Bœuf aux Truffes</span>
+          <span class="menu-item-price">8 500 XAF</span>
+        </div>
+        <p class="menu-item-desc">Fines tranches de bœuf, copeaux de truffe, roquette sauvage et parmesan affiné 24 mois.</p>
+        <span class="menu-item-tag">Chef's Selection</span>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Crevettes Grillées au Beurre d'Ail</span>
+          <span class="menu-item-price">7 200 XAF</span>
+        </div>
+        <p class="menu-item-desc">Grosses crevettes flambées au cognac, beurre maison aux herbes fraîches, pain grillé artisanal.</p>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Foie Gras Poêlé, Chutney Mangue</span>
+          <span class="menu-item-price">9 800 XAF</span>
+        </div>
+        <p class="menu-item-desc">Foie gras de canard poêlé sur brioche toastée, chutney mangue-gingembre, réduction balsamique.</p>
+        <span class="menu-item-tag">Signature</span>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Velouté de Plantain et Coco</span>
+          <span class="menu-item-price">4 500 XAF</span>
+        </div>
+        <p class="menu-item-desc">Crème onctueuse de plantain mûr au lait de coco, noix de cajou torréfiées et piment doux.</p>
+        <span class="menu-item-tag">Local Fusion</span>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Tartare de Thon Yellowfin</span>
+          <span class="menu-item-price">8 000 XAF</span>
+        </div>
+        <p class="menu-item-desc">Thon frais haché au couteau, avocat, sésame grillé, sauce ponzu maison et chips de wonton.</p>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Salade César aux Crevettes</span>
+          <span class="menu-item-price">5 800 XAF</span>
+        </div>
+        <p class="menu-item-desc">Romaine croquante, crevettes sautées, croûtons maison, anchois et parmesan râpé, sauce César signature.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLATS -->
+  <div class="menu-panel" id="plats">
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Filet de Bœuf Rossini</span>
+          <span class="menu-item-price">22 500 XAF</span>
+        </div>
+        <p class="menu-item-desc">Filet de bœuf Wellington, foie gras poêlé, sauce Périgueux à la truffe noire, gratin dauphinois.</p>
+        <span class="menu-item-tag">Chef's Masterpiece</span>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Homard Thermidor</span>
+          <span class="menu-item-price">32 000 XAF</span>
+        </div>
+        <p class="menu-item-desc">Demi-homard breton gratiné à la sauce thermidor, riz pilaf aux herbes, légumes glacés au beurre.</p>
+        <span class="menu-item-tag">Prestige</span>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Suprême de Volaille Farcie</span>
+          <span class="menu-item-price">14 500 XAF</span>
+        </div>
+        <p class="menu-item-desc">Poulet fermier farci aux morilles, sauce à la crème et vin blanc, gratin de pommes de terre au thym.</p>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Ndolé Gastronomique</span>
+          <span class="menu-item-price">12 000 XAF</span>
+        </div>
+        <p class="menu-item-desc">Notre interprétation raffinée du ndolé camerounais, crevettes géantes, viande de bœuf, plantains frits.</p>
+        <span class="menu-item-tag">Terroir Camerounais</span>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Côte d'Agneau Persillée</span>
+          <span class="menu-item-price">19 000 XAF</span>
+        </div>
+        <p class="menu-item-desc">Carré d'agneau en croûte de pistaches, jus réduit au romarin, ratatouille provençale et polenta crémeuse.</p>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Risotto aux Fruits de Mer</span>
+          <span class="menu-item-price">15 500 XAF</span>
+        </div>
+        <p class="menu-item-desc">Risotto crémeux au vin blanc, crevettes, calamars, moules et palourdes, huile de truffe blanche.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOISSONS -->
+  <div class="menu-panel" id="boissons">
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Zangalewe Sunset</span>
+          <span class="menu-item-price">5 500 XAF</span>
+        </div>
+        <p class="menu-item-desc">Rhum Diplomatico, mangue fraîche, gingembre, citron vert, sirop de canne, pétales de hibiscus.</p>
+        <span class="menu-item-tag">Signature Cocktail</span>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Champagne Moët & Chandon</span>
+          <span class="menu-item-price">28 000 XAF</span>
+        </div>
+        <p class="menu-item-desc">Brut Impérial, bouteille 75cl. Également disponible en demi-bouteille.</p>
+        <span class="menu-item-tag">Prestige</span>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Old Fashioned Premium</span>
+          <span class="menu-item-price">6 800 XAF</span>
+        </div>
+        <p class="menu-item-desc">Buffalo Trace Bourbon, angostura bitters, sucre de canne, zeste d'orange, cube de glace artisanal.</p>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Sélection de Vins Rouges</span>
+          <span class="menu-item-price">dès 4 500 XAF</span>
+        </div>
+        <p class="menu-item-desc">Bordeaux, Bourgogne, Malbec argentin. Conseils de notre sommelier. Carte complète disponible.</p>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Bastos Garden Mocktail</span>
+          <span class="menu-item-price">3 800 XAF</span>
+        </div>
+        <p class="menu-item-desc">Ananas, goyave, citron vert, basilic frais, eau gazeuse premium. Sans alcool, 100% fraîcheur.</p>
+        <span class="menu-item-tag">Sans Alcool</span>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Whisky Selection</span>
+          <span class="menu-item-price">dès 5 000 XAF</span>
+        </div>
+        <p class="menu-item-desc">Johnnie Walker Blue, Glenfiddich 18 ans, Macallan 12 ans. Single malts et blends d'exception.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- DESSERTS -->
+  <div class="menu-panel" id="desserts">
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Fondant Chocolat Grand Cru</span>
+          <span class="menu-item-price">5 500 XAF</span>
+        </div>
+        <p class="menu-item-desc">Chocolat Valrhona 72%, cœur coulant au caramel beurre salé, glace vanille Bourbon, pralin.</p>
+        <span class="menu-item-tag">Signature</span>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Crème Brûlée à la Vanille</span>
+          <span class="menu-item-price">4 200 XAF</span>
+        </div>
+        <p class="menu-item-desc">Vanille de Tahiti, caramel craquant, tuile dentelle aux amandes, coulis de fruits de la passion.</p>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Assiette Tropicale</span>
+          <span class="menu-item-price">4 800 XAF</span>
+        </div>
+        <p class="menu-item-desc">Sorbet maison mangue-passion, carpaccio d'ananas, coco frais torréfié, sirop de citronelle.</p>
+        <span class="menu-item-tag">Local Fusion</span>
+      </div>
+      <div class="menu-item">
+        <div class="menu-item-header">
+          <span class="menu-item-name">Plateau de Fromages Affinés</span>
+          <span class="menu-item-price">7 500 XAF</span>
+        </div>
+        <p class="menu-item-desc">Sélection de 5 fromages, confiture de figue, pain de noix artisanal, miel de fleurs sauvages.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="menu-cta fade-in">
+    <a href="#reservation" class="btn-primary">Réserver votre table</a>
+  </div>
+</section>
+
+<!-- GALERIE -->
+<section id="galerie" style="padding-left:0;padding-right:0;">
+  <div class="gallery-header fade-in" style="padding:0 5vw;">
+    <span class="section-label">Notre Univers</span>
+    <div class="gold-line"></div>
+    <h2 class="section-title">Galerie & <em>Atmosphère</em></h2>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <div class="gallery-inner g1">
+        <svg viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="200" cy="250" r="150" fill="none" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
+          <circle cx="200" cy="250" r="100" fill="none" stroke="rgba(201,168,76,0.2)" stroke-width="1"/>
+          <line x1="0" y1="250" x2="400" y2="250" stroke="rgba(201,168,76,0.1)" stroke-width="1"/>
+          <line x1="200" y1="0" x2="200" y2="500" stroke="rgba(201,168,76,0.1)" stroke-width="1"/>
+          <text x="200" y="240" text-anchor="middle" fill="rgba(201,168,76,0.4)" font-size="18" font-family="serif">Salle principale</text>
+          <text x="200" y="268" text-anchor="middle" fill="rgba(201,168,76,0.2)" font-size="11">Fine Dining</text>
+        </svg>
+      </div>
+      <div class="gallery-caption">La Salle Principale</div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-inner g2">
+        <svg viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg">
+          <rect x="50" y="80" width="200" height="120" rx="2" fill="none" stroke="rgba(37,180,220,0.2)" stroke-width="1"/>
+          <circle cx="150" cy="140" r="40" fill="none" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
+          <text x="150" y="136" text-anchor="middle" fill="rgba(201,168,76,0.4)" font-size="14" font-family="serif">Le Bar</text>
+          <text x="150" y="155" text-anchor="middle" fill="rgba(201,168,76,0.2)" font-size="10">Lounge Cocktails</text>
+        </svg>
+      </div>
+      <div class="gallery-caption">Le Bar Lounge</div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-inner g3">
+        <svg viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="150" cy="120" rx="80" ry="60" fill="none" stroke="rgba(201,100,100,0.2)" stroke-width="1"/>
+          <text x="150" y="116" text-anchor="middle" fill="rgba(201,168,76,0.4)" font-size="14" font-family="serif">Cuisine</text>
+          <text x="150" y="134" text-anchor="middle" fill="rgba(201,168,76,0.2)" font-size="10">Fine Dining</text>
+        </svg>
+      </div>
+      <div class="gallery-caption">Nos Créations Culinaires</div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-inner g4">
+        <svg viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="150,40 260,200 40,200" fill="none" stroke="rgba(201,168,76,0.2)" stroke-width="1"/>
+          <text x="150" y="148" text-anchor="middle" fill="rgba(201,168,76,0.4)" font-size="14" font-family="serif">Terrasse</text>
+          <text x="150" y="168" text-anchor="middle" fill="rgba(201,168,76,0.2)" font-size="10">Vue panoramique</text>
+        </svg>
+      </div>
+      <div class="gallery-caption">Terrasse & Lounge</div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-inner g5">
+        <svg viewBox="0 0 300 240" xmlns="http://www.w3.org/2000/svg">
+          <rect x="30" y="30" width="240" height="180" fill="none" stroke="rgba(100,150,220,0.2)" stroke-width="1"/>
+          <rect x="60" y="60" width="180" height="120" fill="none" stroke="rgba(201,168,76,0.15)" stroke-width="1"/>
+          <text x="150" y="116" text-anchor="middle" fill="rgba(201,168,76,0.4)" font-size="14" font-family="serif">Soirées</text>
+          <text x="150" y="136" text-anchor="middle" fill="rgba(201,168,76,0.2)" font-size="10">Ambiance Nocturne</text>
+        </svg>
+      </div>
+      <div class="gallery-caption">Soirées & Événements</div>
+    </div>
+  </div>
+</section>
+
+<!-- AMBIANCE / LOUNGE -->
+<section id="ambiance">
+  <div class="ambiance-bg"></div>
+  <div style="text-align:center; margin-bottom: 60px;" class="fade-in">
+    <span class="section-label">Art de Vivre</span>
+    <div class="gold-line" style="margin:0 auto;background:linear-gradient(to right,transparent,var(--or),transparent);"></div>
+    <h2 class="section-title">L'Expérience <em>Zangalewe</em></h2>
+    <p class="section-body" style="margin:0 auto; text-align:center;">Chaque moment ici est conçu pour éveiller vos sens et créer des souvenirs inoubliables.</p>
+  </div>
+
+  <div class="ambiance-grid">
+    <div class="ambiance-card fade-in">
+      <span class="ambiance-icon">🎶</span>
+      <h3 class="ambiance-title">Live Music & DJ</h3>
+      <p class="ambiance-text">Chaque vendredi et samedi soir, plongez dans une atmosphère musicale unique : jazz, afrobeat et lounge pour rythmer votre soirée.</p>
+      <span class="ambiance-tag">Vendredi & Samedi · 21h</span>
+    </div>
+    <div class="ambiance-card fade-in">
+      <span class="ambiance-icon">🥂</span>
+      <h3 class="ambiance-title">Cocktails Signatures</h3>
+      <p class="ambiance-text">Notre mixologue crée des cocktails exclusifs inspirés des saveurs d'Afrique centrale, alliant spiritueux premium et ingrédients locaux.</p>
+      <span class="ambiance-tag">Bar ouvert · 18h–02h</span>
+    </div>
+    <div class="ambiance-card fade-in">
+      <span class="ambiance-icon">🌙</span>
+      <h3 class="ambiance-title">Soirées Privées</h3>
+      <p class="ambiance-text">Anniversaires, dîners d'affaires, fiançailles… Notre équipe organise vos événements privés avec une discrétion et une élégance absolues.</p>
+      <span class="ambiance-tag">Sur réservation</span>
+    </div>
+  </div>
+</section>
+
+<!-- AVIS CLIENTS -->
+<section id="avis">
+  <div class="reviews-header fade-in">
+    <span class="section-label">Ils en parlent</span>
+    <div class="gold-line" style="margin:0 auto;background:linear-gradient(to right,transparent,var(--or),transparent);"></div>
+    <h2 class="section-title">Avis de nos <em>Hôtes</em></h2>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card fade-in">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">« Une expérience culinaire absolument remarquable. Le foie gras et le filet de bœuf étaient parfaits, le service irréprochable. Un must à Yaoundé. »</p>
+      <p class="review-author"><span>✦</span>Sophie M. — Ambassade de France</p>
+    </div>
+    <div class="review-card fade-in">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">« The best restaurant in Yaoundé, without question. The ambiance is sophisticated, the cocktails are outstanding and the team is incredibly professional. »</p>
+      <p class="review-author"><span>✦</span>David K. — Expatriate, Bastos</p>
+    </div>
+    <div class="review-card fade-in">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">« Nous avons célébré notre anniversaire de mariage ici. Tout était parfait : la décoration, le menu surprise, le champagne… Une soirée mémorable. »</p>
+      <p class="review-author"><span>✦</span>Éric & Nadège T. — Yaoundé</p>
+    </div>
+    <div class="review-card fade-in">
+      <div class="review-stars">★★★★☆</div>
+      <p class="review-text">« Le ndolé gastronomique est une véritable révélation. Enfin une interprétation élégante de notre cuisine traditionnelle. La terrasse est magnifique le soir. »</p>
+      <p class="review-author"><span>✦</span>Christelle A. — Professionnelle, Yaoundé</p>
+    </div>
+    <div class="review-card fade-in">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">« Excellente adresse pour les dîners d'affaires. Cadre discret et raffiné, cuisine de qualité. Mon restaurant de prédilection à Yaoundé depuis 3 ans. »</p>
+      <p class="review-author"><span>✦</span>Jean-Pierre N. — Directeur Général</p>
+    </div>
+    <div class="review-card fade-in">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">« The lounge atmosphere on Friday nights is incredible. Great music, amazing cocktails and a crowd that makes you feel like you're in Paris or Abidjan. »</p>
+      <p class="review-author"><span>✦</span>Marcus O. — Entrepreneur, Lagos</p>
+    </div>
+  </div>
+</section>
+
+<!-- RÉSERVATION -->
+<section id="reservation">
+  <div class="reservation-grid">
+    <div class="reservation-info fade-in-left">
+      <span class="section-label">Réservation</span>
+      <div class="gold-line"></div>
+      <h2 class="section-title">Vivez <em>l'Expérience</em></h2>
+      <p class="section-body">Réservez votre table pour une soirée inoubliable. Pour les groupes de plus de 8 personnes ou les événements privés, contactez-nous directement.</p>
+      <div style="margin-top: 2.5rem;">
+        <div class="res-detail">
+          <span class="res-detail-icon">🕐</span>
+          <div>
+            <div class="res-detail-title">Horaires d'ouverture</div>
+            <div class="res-detail-text">Déjeuner : 12h00 – 15h00<br>Dîner : 19h00 – 23h30<br>Bar & Lounge : 18h00 – 02h00</div>
+          </div>
+        </div>
+        <div class="res-detail">
+          <span class="res-detail-icon">📍</span>
+          <div>
+            <div class="res-detail-title">Adresse</div>
+            <div class="res-detail-text">Résidence Hôtelière Medom Palace<br>Quartier Bastos, Yaoundé<br>Cameroun</div>
+          </div>
+        </div>
+        <div class="res-detail">
+          <span class="res-detail-icon">📞</span>
+          <div>
+            <div class="res-detail-title">Contact direct</div>
+            <div class="res-detail-text"><a href="tel:+237600000000" style="color:var(--text-light);text-decoration:none;">+237 600 000 000</a><br><a href="tel:+237699000000" style="color:var(--text-light);text-decoration:none;">+237 699 000 000</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="reservation-form fade-in">
+      <h3 class="form-title">Réservez votre table</h3>
+      <form id="reservationForm" onsubmit="handleReservation(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="nom">Nom complet *</label>
+            <input class="form-input" type="text" id="nom" placeholder="Votre nom" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="tel">Téléphone *</label>
+            <input class="form-input" type="tel" id="tel" placeholder="+237 6XX XXX XXX" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="date">Date *</label>
+            <input class="form-input" type="date" id="date" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="heure">Heure *</label>
+            <select class="form-input form-select" id="heure" required>
+              <option value="" disabled selected>Choisir</option>
+              <optgroup label="Déjeuner">
+                <option>12h00</option><option>12h30</option><option>13h00</option><option>13h30</option>
+              </optgroup>
+              <optgroup label="Dîner">
+                <option>19h00</option><option>19h30</option><option>20h00</option><option>20h30</option><option>21h00</option><option>21h30</option>
+              </optgroup>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="couverts">Nombre de personnes *</label>
+            <select class="form-input form-select" id="couverts" required>
+              <option value="" disabled selected>Sélectionner</option>
+              <option>1 personne</option><option>2 personnes</option><option>3 personnes</option>
+              <option>4 personnes</option><option>5 personnes</option><option>6 personnes</option>
+              <option>7–10 personnes</option><option>10+ personnes</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="occasion">Occasion</label>
+            <select class="form-input form-select" id="occasion">
+              <option value="">Aucune occasion particulière</option>
+              <option>Anniversaire</option><option>Dîner romantique</option><option>Dîner d'affaires</option>
+              <option>Fiançailles</option><option>Célébration</option><option>Autre</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="message">Demandes spéciales</label>
+          <input class="form-input" type="text" id="message" placeholder="Allergies, préférences, décoration...">
+        </div>
+        <button type="submit" class="form-submit">Confirmer la réservation</button>
+        <div id="formSuccess" class="form-success">✦ Merci ! Votre demande de réservation a été envoyée. Nous vous contacterons sous 2 heures pour confirmer.</div>
+        <p class="form-note">Ou réservez instantanément via <a href="https://wa.me/237657150570?text=Bonjour%2C%20je%20souhaite%20r%C3%A9server%20une%20table%20au%20Zangalewe" style="color:var(--or);text-decoration:none;">WhatsApp ↗</a></p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div style="text-align:center; margin-bottom:60px;" class="fade-in">
+    <span class="section-label">Nous Trouver</span>
+    <div class="gold-line" style="margin:0 auto;background:linear-gradient(to right,transparent,var(--or),transparent);"></div>
+    <h2 class="section-title">Venez nous <em>Rendre Visite</em></h2>
+  </div>
+  <div class="contact-grid">
+    <div class="map-container fade-in-left">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3980.8022168898!2d11.508946!3d3.8721329!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x108bcfa58e69a26d%3A0x1b8bb453a26bfe84!2sBastos%2C%20Yaound%C3%A9%2C%20Cameroon!5e0!3m2!1sfr!2scm!4v1699000000000!5m2!1sfr!2scm"
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        title="Localisation Zangalewe, Bastos Yaoundé">
+      </iframe>
+      <div class="map-overlay">
+        <div class="map-label">Bastos, Yaoundé · Résidence Medom Palace</div>
+      </div>
+    </div>
+    <div class="contact-info fade-in">
+      <div class="contact-item">
+        <span class="contact-icon">📍</span>
+        <div>
+          <div class="contact-label">Adresse</div>
+          <div class="contact-value">Résidence Hôtelière Medom Palace<br>Quartier Bastos, Yaoundé<br>Cameroun</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-icon">📞</span>
+        <div>
+          <div class="contact-label">Téléphone</div>
+          <div class="contact-value">
+            <a href="tel:+237600000000">+237 656 242 882</a><br>
+            <a href="tel:+237699000000">+237 651 234 567</a>
+          </div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-icon">✉️</span>
+        <div>
+          <div class="contact-label">Email</div>
+          <div class="contact-value"><a href="mailto:reservation@zangalewe.cm">reservation@zangalewe.cm</a></div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-icon">🕐</span>
+        <div>
+          <div class="contact-label">Horaires</div>
+          <div class="contact-value">
+            Lun – Ven : 12h–15h · 19h–23h30<br>
+            Sam – Dim : 12h–16h · 19h–02h<br>
+            Bar & Lounge : 18h – 02h (tlj)
+          </div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <span class="contact-icon">📱</span>
+        <div>
+          <div class="contact-label">Réseaux sociaux</div>
+          <div class="contact-value">
+            <a href="#">Instagram @zangalewe_yaoundé</a><br>
+            <a href="#">Facebook · Zangalewe Yaoundé</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">Zangalewe</div>
+      <p class="footer-desc">Bar-Lounge Restaurant haut de gamme situé au cœur du quartier diplomatique de Bastos, Yaoundé. Une expérience gastronomique d'exception depuis 2016.</p>
+      <div class="footer-social">
+        <a href="#" class="social-btn" aria-label="Instagram">ig</a>
+        <a href="#" class="social-btn" aria-label="Facebook">fb</a>
+        <a href="https://wa.me/237600000000" class="social-btn" aria-label="WhatsApp">wa</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-heading">Navigation</div>
+      <ul class="footer-links">
+        <li><a href="#accueil">Accueil</a></li>
+        <li><a href="#apropos">À propos</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#galerie">Galerie</a></li>
+        <li><a href="#ambiance">Ambiance</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Services</div>
+      <ul class="footer-links">
+        <li><a href="#reservation">Réservation</a></li>
+        <li><a href="#ambiance">Événements privés</a></li>
+        <li><a href="#menu">Nos menus</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#avis">Avis clients</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Contact</div>
+      <ul class="footer-links">
+        <li><a href="tel:+237600000000">+237 600 000 000</a></li>
+        <li><a href="mailto:reservation@zangalewe.cm">reservation@zangalewe.cm</a></li>
+        <li><a href="#contact">Bastos, Yaoundé</a></li>
+        <li><a href="https://wa.me/237600000000">WhatsApp</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2025 <span>Zangalewe</span> Bar-Lounge Restaurant. Tous droits réservés.</div>
+    <div>Résidence Medom Palace · Bastos · Yaoundé · Cameroun</div>
+  </div>
+</footer>
+
+<!-- WHATSAPP BUTTON -->
+<a href="https://wa.me/237657150570?text=Bonjour%20Zangalewe%2C%20je%20souhaite%20r%C3%A9server%20une%20table." class="whatsapp-btn" aria-label="Réserver via WhatsApp" target="_blank" rel="noopener">
+  <div class="whatsapp-pulse"></div>
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+  </svg>
+</a>
+
+<script>
+  // ── NAV SCROLL ──
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // ── BURGER MENU ──
+  const burger = document.getElementById('burger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+  });
+  function closeMobile() {
+    burger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+  }
+
+  // ── MENU TABS ──
+  function switchTab(tab) {
+    document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(tab).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  // ── SCROLL ANIMATIONS ──
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+  document.querySelectorAll('.fade-in, .fade-in-left').forEach(el => observer.observe(el));
+
+  // ── RESERVATION FORM ──
+  function handleReservation(e) {
+    e.preventDefault();
+    const form = document.getElementById('reservationForm');
+    const success = document.getElementById('formSuccess');
+    // WhatsApp redirect
+    const nom = document.getElementById('nom').value;
+    const tel = document.getElementById('tel').value;
+    const date = document.getElementById('date').value;
+    const heure = document.getElementById('heure').value;
+    const couverts = document.getElementById('couverts').value;
+    const occasion = document.getElementById('occasion').value;
+    const msg = document.getElementById('message').value;
+
+    const whatsappMsg = encodeURIComponent(
+      `🍽️ *Demande de Réservation - Zangalewe*\n\n` +
+      `👤 Nom: ${nom}\n📞 Tél: ${tel}\n📅 Date: ${date}\n⏰ Heure: ${heure}\n` +
+      `👥 Personnes: ${couverts}${occasion ? '\n🎉 Occasion: '+occasion : ''}${msg ? '\n📝 Notes: '+msg : ''}`
+    );
+
+    success.style.display = 'block';
+    form.querySelectorAll('input, select').forEach(el => el.value = '');
+
+    setTimeout(() => {
+      window.open(`https://wa.me/237600000000?text=${whatsappMsg}`, '_blank');
+    }, 1500);
+  }
+
+  // ── SET MIN DATE ──
+  const dateInput = document.getElementById('date');
+  if (dateInput) {
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    dateInput.min = tomorrow.toISOString().split('T')[0];
+  }
+
+  // ── SMOOTH ANCHOR ──
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        const offset = 80;
+        const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+
+<!-- Back to portfolio -->
+<a href="../index.html" style="position:fixed;bottom:24px;left:24px;z-index:9999;display:inline-flex;align-items:center;gap:8px;padding:0.6rem 1.2rem;border-radius:100px;background:rgba(0,0,0,0.8);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.15);color:#fff;font-size:0.82rem;font-weight:600;text-decoration:none;">&#8592; Portfolio</a>
+</body>
+</html>

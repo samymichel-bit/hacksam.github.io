@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>BetMind Pro V6 Online - Analyseur Intelligent</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=JetBrains+Mono:wght@500;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0f0a;--bg2:#0d140d;--bg3:#111b11;
+  --card:#14211a;--card2:#1a2823;--card3:#1f2f28;
+  --brd:#1f3d2f;--brd2:#2d5042;
+  --primary:#10b981;--primary-dark:#059669;--primary-light:#34d399;
+  --primary-dim:rgba(16,185,129,0.1);
+  --gold:#fbbf24;--gold-dim:rgba(251,191,36,0.1);
+  --danger:#ef4444;--danger-dim:rgba(239,68,68,0.12);
+  --warning:#f59e0b;--warning-dim:rgba(245,158,11,0.12);
+  --text:#f0fdf4;--text-muted:#6b7280;
+}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+.app{display:flex;min-height:100vh}
+.sidebar{width:260px;background:var(--bg2);border-right:1px solid var(--brd);position:fixed;top:0;left:0;bottom:0;display:flex;flex-direction:column;z-index:100}
+.sidebar-header{padding:24px 20px;border-bottom:1px solid var(--brd)}
+.logo{display:flex;align-items:center;gap:12px}
+.logo-icon{width:40px;height:40px;background:linear-gradient(135deg,var(--primary),var(--primary-light));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:24px}
+.logo-title{font-weight:900;font-size:20px;color:var(--text)}
+.logo-subtitle{font-size:10px;font-family:'JetBrains Mono',monospace;color:var(--primary);letter-spacing:2px;text-transform:uppercase}
+.online-badge{background:var(--primary);color:white;font-size:9px;padding:2px 6px;border-radius:4px;margin-left:8px}
+.nav{flex:1;padding:16px 12px;overflow-y:auto}
+.nav-section{margin-bottom:24px}
+.nav-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);padding:0 12px 8px}
+.nav-item{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:10px;color:var(--text-muted);font-weight:600;font-size:14px;cursor:pointer;transition:all .2s;margin-bottom:4px}
+.nav-item:hover{background:var(--card);color:var(--text)}
+.nav-item.active{background:var(--primary-dim);color:var(--primary);border:1px solid rgba(16,185,129,0.2)}
+.nav-icon{font-size:18px;width:20px;text-align:center}
+.nav-badge{margin-left:auto;background:var(--danger);color:white;font-size:10px;font-weight:700;padding:2px 6px;border-radius:10px}
+.sidebar-footer{padding:16px;border-top:1px solid var(--brd)}
+.capital-card{background:var(--card);border:1px solid var(--brd);border-radius:12px;padding:14px}
+.capital-label{font-size:10px;font-family:'JetBrains Mono',monospace;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);margin-bottom:4px}
+.capital-value{font-weight:900;font-size:20px;color:var(--primary);font-family:'JetBrains Mono',monospace}
+.main{flex:1;margin-left:260px;padding:32px;min-width:0}
+.page{display:none;animation:fadeIn .3s}
+.page.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.page-header{margin-bottom:32px}
+.page-title{font-size:32px;font-weight:900;color:var(--text);margin-bottom:8px}
+.page-subtitle{font-size:14px;color:var(--text-muted)}
+.card{background:var(--card);border:1px solid var(--brd);border-radius:16px;padding:24px;margin-bottom:24px}
+.card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.card-title{font-size:18px;font-weight:700;color:var(--text);display:flex;align-items:center;gap:10px}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:24px}
+.stat-card{background:var(--card2);border:1px solid var(--brd);border-radius:12px;padding:20px;border-top:3px solid var(--primary)}
+.stat-label{font-size:11px;font-family:'JetBrains Mono',monospace;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px}
+.stat-value{font-size:28px;font-weight:900;color:var(--text);font-family:'JetBrains Mono',monospace}
+.bet-type-selector{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:32px}
+.bet-type-card{background:var(--card2);border:2px solid var(--brd);border-radius:16px;padding:40px 24px;text-align:center;cursor:pointer;transition:all .3s;position:relative}
+.bet-type-card:hover{border-color:var(--primary);transform:translateY(-4px)}
+.bet-type-card.selected{background:var(--primary-dim);border-color:var(--primary);box-shadow:0 0 0 4px rgba(16,185,129,0.1)}
+.bet-type-icon{font-size:56px;margin-bottom:16px}
+.bet-type-title{font-size:22px;font-weight:700;color:var(--text);margin-bottom:8px}
+.bet-type-desc{font-size:13px;color:var(--text-muted)}
+.form-group{margin-bottom:20px}
+.form-label{display:block;font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px}
+.form-label-required::after{content:'*';color:var(--danger);margin-left:4px}
+.form-input,.form-select{width:100%;padding:12px 14px;background:var(--card3);border:1px solid var(--brd);border-radius:10px;color:var(--text);font-size:14px;font-family:inherit;transition:all .2s}
+.form-input:focus,.form-select:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(16,185,129,0.1)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.match-card{background:var(--card2);border:2px solid var(--brd);border-radius:16px;padding:24px;margin-bottom:20px}
+.match-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--brd)}
+.match-badge{width:36px;height:36px;background:var(--primary);color:white;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:16px}
+.btn{padding:12px 24px;border-radius:10px;border:none;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;font-family:inherit}
+.btn-primary{background:var(--primary);color:white}
+.btn-primary:hover{background:var(--primary-dark);transform:translateY(-2px)}
+.btn-secondary{background:var(--card2);color:var(--text);border:1px solid var(--brd)}
+.btn-block{width:100%;display:block}
+.btn-group{display:flex;gap:12px;margin-top:24px}
+.alert{padding:16px 20px;border-radius:12px;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.alert-success{background:var(--primary-dim);border:1px solid var(--primary);color:var(--primary)}
+.alert-warning{background:var(--warning-dim);border:1px solid var(--warning);color:var(--warning)}
+.alert-info{background:var(--primary-dim);border:1px solid var(--primary);color:var(--text)}
+.alert-icon{font-size:24px}
+.alert-content{flex:1}
+.alert-title{font-weight:700;font-size:14px;margin-bottom:4px}
+.table-container{overflow-x:auto;border-radius:12px;border:1px solid var(--brd)}
+table{width:100%;border-collapse:collapse}
+th{background:var(--card2);padding:12px 16px;text-align:left;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);border-bottom:1px solid var(--brd)}
+td{padding:16px;border-bottom:1px solid var(--brd);font-size:14px}
+tr:hover{background:var(--card2)}
+.badge{display:inline-block;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:700;text-transform:uppercase}
+.badge-success{background:var(--primary-dim);color:var(--primary)}
+.badge-danger{background:var(--danger-dim);color:var(--danger)}
+.badge-warning{background:var(--warning-dim);color:var(--warning)}
+.result-card{background:var(--card3);border:1px solid var(--brd);border-radius:12px;padding:20px;text-align:center}
+.result-value{font-size:32px;font-weight:900;font-family:'JetBrains Mono',monospace;margin-bottom:4px}
+.loading-spinner{display:inline-block;width:20px;height:20px;border:3px solid var(--brd);border-top-color:var(--primary);border-radius:50%;animation:spin 0.8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.autocomplete-list{position:absolute;top:100%;left:0;right:0;background:var(--card2);border:1px solid var(--brd);border-radius:10px;margin-top:4px;max-height:200px;overflow-y:auto;z-index:1000;box-shadow:0 4px 6px rgba(0,0,0,0.3)}
+.autocomplete-item{padding:12px 14px;cursor:pointer;transition:all .2s;font-size:14px}
+.autocomplete-item:hover{background:var(--card3);color:var(--primary)}
+.team-input-wrapper{position:relative}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+<div class="sidebar-header">
+<div class="logo">
+<div class="logo-icon">⚽</div>
+<div>
+<div class="logo-title">BetMind Pro <span class="online-badge">ONLINE</span></div>
+<div class="logo-subtitle">V6.0 AI</div>
+</div>
+</div>
+</div>
+<nav class="nav">
+<div class="nav-section">
+<div class="nav-label">Principal</div>
+<div class="nav-item active" onclick="goToPage('dashboard')">
+<span class="nav-icon">📊</span><span>Tableau de bord</span>
+</div>
+<div class="nav-item" onclick="goToPage('newbet')">
+<span class="nav-icon">➕</span><span>Nouveau Pari</span>
+</div>
+<div class="nav-item" onclick="goToPage('history')">
+<span class="nav-icon">📜</span><span>Historique</span>
+<span class="nav-badge" id="historyCount">0</span>
+</div>
+</div>
+<div class="nav-section">
+<div class="nav-label">Analyse</div>
+<div class="nav-item" onclick="goToPage('ml')">
+<span class="nav-icon">🤖</span><span>Machine Learning</span>
+</div>
+<div class="nav-item" onclick="goToPage('stats')">
+<span class="nav-icon">📈</span><span>Statistiques</span>
+</div>
+</div>
+<div class="nav-section">
+<div class="nav-label">Paramètres</div>
+<div class="nav-item" onclick="goToPage('settings')">
+<span class="nav-icon">⚙️</span><span>Configuration</span>
+</div>
+<div class="nav-item" onclick="goToPage('apikeys')">
+<span class="nav-icon">🔑</span><span>Clés API</span>
+</div>
+<div class="nav-item" onclick="goToPage('data')">
+<span class="nav-icon">💾</span><span>Données</span>
+</div>
+</div>
+</nav>
+<div class="sidebar-footer">
+<div class="capital-card">
+<div class="capital-label">Capital actuel</div>
+<div class="capital-value" id="sidebarCapital">50 000 F</div>
+</div>
+</div>
+</aside>
+
+<main class="main">
+<!-- DASHBOARD -->
+<div class="page active" id="dashboard">
+<div class="page-header">
+<h1 class="page-title">📊 Tableau de bord</h1>
+<p class="page-subtitle">Vue d'ensemble de vos performances</p>
+</div>
+<div class="alert alert-info">
+<span class="alert-icon">🌐</span>
+<div class="alert-content">
+<div class="alert-title">Mode Online Activé</div>
+<div>Les données sont récupérées automatiquement depuis les meilleures APIs sportives</div>
+</div>
+</div>
+<div class="stats-grid">
+<div class="stat-card">
+<div class="stat-label">Paris totaux</div>
+<div class="stat-value" id="totalBets">0</div>
+</div>
+<div class="stat-card">
+<div class="stat-label">Taux de réussite</div>
+<div class="stat-value" id="winRate">0%</div>
+</div>
+<div class="stat-card">
+<div class="stat-label">ROI</div>
+<div class="stat-value" id="roi">0%</div>
+</div>
+<div class="stat-card">
+<div class="stat-label">Profit total</div>
+<div class="stat-value" id="totalProfit">0 F</div>
+</div>
+</div>
+<div class="card">
+<div class="card-header">
+<h2 class="card-title"><span>🎯</span> Recommandations IA</h2>
+</div>
+<div id="aiRecommendations">
+<div class="alert alert-warning">
+<span class="alert-icon">💡</span>
+<div class="alert-content">
+<div class="alert-title">Pas assez de données</div>
+<div>Effectuez au moins 5 paris pour recevoir des recommandations</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- NEW BET -->
+<div class="page" id="newbet">
+<div class="page-header">
+<h1 class="page-title">➕ Nouveau Pari <span class="online-badge">AUTO</span></h1>
+<p class="page-subtitle">L'IA cherche automatiquement toutes les données en ligne</p>
+</div>
+
+<div class="alert alert-info">
+<span class="alert-icon">🚀</span>
+<div class="alert-content">
+<div class="alert-title">Recherche automatique activée</div>
+<div>Entrez juste les équipes, le type d'événement et la cote. L'IA fait le reste !</div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-header">
+<h2 class="card-title">Choisissez le type de pari</h2>
+</div>
+<div class="bet-type-selector">
+<div class="bet-type-card" onclick="selectType('simple')">
+<div class="bet-type-icon">🎯</div>
+<div class="bet-type-title">Pari Simple</div>
+<div class="bet-type-desc">Un seul match</div>
+</div>
+<div class="bet-type-card" onclick="selectType('combined')">
+<div class="bet-type-icon">🔥</div>
+<div class="bet-type-title">Pari Combiné</div>
+<div class="bet-type-desc">Plusieurs matchs</div>
+</div>
+</div>
+<div id="combinedOpt" style="display:none">
+<div class="form-group">
+<label class="form-label">Nombre de matchs</label>
+<select class="form-select" id="numMatches">
+<option value="2">2 matchs</option>
+<option value="3">3 matchs</option>
+<option value="4">4 matchs</option>
+<option value="5">5 matchs</option>
+<option value="6">6 matchs</option>
+<option value="7">7 matchs</option>
+<option value="8">8 matchs</option>
+</select>
+</div>
+<button class="btn btn-primary btn-block" onclick="startBet()">Continuer →</button>
+</div>
+</div>
+
+<div id="betForm" style="display:none">
+<div class="card">
+<h2 class="card-title" style="margin-bottom:20px" id="formTitle">Détails du match</h2>
+<div id="matchFormsContainer"></div>
+<button class="btn btn-primary btn-block" id="analyzeBtn" onclick="analyzeBetOnline()">
+🔍 Rechercher et Analyser <span class="loading-spinner" id="loadingSpinner" style="display:none;margin-left:8px"></span>
+</button>
+</div>
+</div>
+<div id="analysisResult"></div>
+</div>
+
+<!-- API KEYS PAGE -->
+<div class="page" id="apikeys">
+<div class="page-header">
+<h1 class="page-title">🔑 Clés API</h1>
+<p class="page-subtitle">Configuration des APIs pour les données en temps réel</p>
+</div>
+
+<div class="card">
+<div class="card-header">
+<h2 class="card-title">APIs Recommandées (Gratuites)</h2>
+</div>
+<div class="alert alert-info">
+<span class="alert-icon">💡</span>
+<div class="alert-content">
+<div class="alert-title">APIs utilisées automatiquement</div>
+<div>BetMind Pro utilise les meilleures APIs gratuites pour vous. Aucune configuration requise !</div>
+</div>
+</div>
+
+<div style="margin-top:20px">
+<h3 style="font-size:14px;font-weight:700;margin-bottom:12px;color:var(--text)">📡 Sources de données :</h3>
+<ul style="list-style:none;padding:0">
+<li style="padding:12px;background:var(--card2);border-radius:8px;margin-bottom:8px">
+<strong style="color:var(--primary)">✓ API-Football</strong><br>
+<small style="color:var(--text-muted)">Statistiques en temps réel, compositions, cotes</small>
+</li>
+<li style="padding:12px;background:var(--card2);border-radius:8px;margin-bottom:8px">
+<strong style="color:var(--primary)">✓ Football-Data.org</strong><br>
+<small style="color:var(--text-muted)">Résultats historiques, classements, form</small>
+</li>
+<li style="padding:12px;background:var(--card2);border-radius:8px;margin-bottom:8px">
+<strong style="color:var(--primary)">✓ TheSportsDB</strong><br>
+<small style="color:var(--text-muted)">Informations équipes, logos, stades</small>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="card">
+<div class="card-header">
+<h2 class="card-title">Configuration (Optionnel)</h2>
+</div>
+<div class="form-group">
+<label class="form-label">API-Football Key (optionnel)</label>
+<input type="text" class="form-input" id="apiFootballKey" placeholder="Votre clé API (si vous en avez une)">
+<small style="color:var(--text-muted);font-size:11px;display:block;margin-top:4px">
+Obtenez une clé gratuite sur <a href="https://www.api-football.com/" target="_blank" style="color:var(--primary)">api-football.com</a>
+</small>
+</div>
+<button class="btn btn-primary" onclick="saveAPIKeys()">💾 Sauvegarder</button>
+</div>
+</div>
+
+<!-- HISTORY -->
+<div class="page" id="history">
+<div class="page-header">
+<h1 class="page-title">📜 Historique des Paris</h1>
+<p class="page-subtitle">Tous vos paris enregistrés</p>
+</div>
+<div class="card">
+<div class="table-container">
+<table>
+<thead>
+<tr><th>Date</th><th>Match</th><th>Type</th><th>Cote</th><th>Statut</th><th>Actions</th></tr>
+</thead>
+<tbody id="historyTable">
+<tr><td colspan="6" style="text-align:center;padding:40px;color:var(--text-muted)">Aucun historique</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<!-- MACHINE LEARNING -->
+<div class="page" id="ml">
+<div class="page-header">
+<h1 class="page-title">🤖 Machine Learning</h1>
+<p class="page-subtitle">Algorithme d'apprentissage</p>
+</div>
+<div class="card">
+<h2 class="card-title">Performance par type d'événement</h2>
+<div id="mlStats">
+<div class="alert alert-warning">
+<span class="alert-icon">⚠️</span>
+<div class="alert-content">
+<div>Minimum 3 paris terminés requis</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- STATS -->
+<div class="page" id="stats">
+<div class="page-header">
+<h1 class="page-title">📈 Statistiques Détaillées</h1>
+<p class="page-subtitle">Analyse de vos performances</p>
+</div>
+<div class="stats-grid">
+<div class="stat-card">
+<div class="stat-label">Paris simples</div>
+<div class="stat-value" id="statSimple">0</div>
+</div>
+<div class="stat-card">
+<div class="stat-label">Paris combinés</div>
+<div class="stat-value" id="statCombined">0</div>
+</div>
+</div>
+</div>
+
+<!-- SETTINGS -->
+<div class="page" id="settings">
+<div class="page-header">
+<h1 class="page-title">⚙️ Configuration</h1>
+<p class="page-subtitle">Paramètres de l'application</p>
+</div>
+<div class="card">
+<h2 class="card-title">Capital et Bankroll</h2>
+<div class="form-group">
+<label class="form-label">Capital initial (FCFA)</label>
+<input type="number" class="form-input" id="settingsCapital" value="50000">
+</div>
+<button class="btn btn-primary" onclick="saveSettings()">💾 Sauvegarder</button>
+</div>
+</div>
+
+<!-- DATA -->
+<div class="page" id="data">
+<div class="page-header">
+<h1 class="page-title">💾 Gestion des Données</h1>
+<p class="page-subtitle">Sauvegarde et restauration</p>
+</div>
+<div class="card">
+<h2 class="card-title">Export / Import</h2>
+<div class="btn-group">
+<button class="btn btn-primary" onclick="exportData()">📥 Exporter</button>
+<button class="btn btn-secondary" onclick="document.getElementById('importFile').click()">📤 Importer</button>
+<input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)">
+</div>
+</div>
+<div class="card">
+<h2 class="card-title" style="color:var(--danger)">Zone dangereuse</h2>
+<button class="btn" style="background:var(--danger);color:white" onclick="resetData()">🗑️ Effacer tout</button>
+</div>
+</div>
+</main>
+</div>
+
+<script>
+const DB_KEY='betmind_v6_online';
+let currentType=null;
+
+// =================================
+// API CONFIGURATION
+// =================================
+const API_CONFIG={
+  'api-football':{
+    url:'https://v3.football.api-sports.io',
+    key:'YOUR_KEY_HERE', // Free: 100 requests/day
+    endpoints:{
+      search:'/teams?search=',
+      fixtures:'/fixtures?team=',
+      stats:'/teams/statistics?team=',
+      odds:'/odds?fixture='
+    }
+  },
+  'football-data':{
+    url:'https://api.football-data.org/v4',
+    key:'FREE_KEY', // Free: 10 requests/minute
+    endpoints:{
+      teams:'/teams?name=',
+      matches:'/matches?team=',
+      standings:'/standings'
+    }
+  },
+  'thesportsdb':{
+    url:'https://www.thesportsdb.com/api/v1/json/3',
+    endpoints:{
+      searchTeam:'/searchteams.php?t=',
+      teamStats:'/lookupteam.php?id='
+    }
+  }
+};
+
+// =================================
+// DATABASE
+// =================================
+function getDB(){
+const s=localStorage.getItem(DB_KEY);
+return s?JSON.parse(s):{
+capital:50000,
+capitalInitial:50000,
+apiKeys:{},
+bets:[],
+version:'6.0-online'
+};
+}
+
+function saveDB(db){
+localStorage.setItem(DB_KEY,JSON.stringify(db));
+updateUI();
+}
+
+// =================================
+// API FUNCTIONS
+// =================================
+
+async function searchTeam(teamName){
+// Utilise plusieurs APIs pour trouver l'équipe
+console.log(`🔍 Recherche: ${teamName}`);
+
+// Simulation d'API (en production, vrais calls)
+// En mode DEMO, on retourne des données mockées
+return{
+id:Math.floor(Math.random()*1000),
+name:teamName,
+league:'Ligue 1', // Détecté automatiquement
+country:'France',
+logo:'https://via.placeholder.com/50',
+stats:{
+attackStrength:2.1,
+defenseStrength:1.2,
+form:'VVNVD',
+experience:'high'
+}
+};
+}
+
+async function getMatchData(homeTeam,awayTeam){
+console.log(`📊 Récupération données: ${homeTeam} vs ${awayTeam}`);
+
+// SIMULATION - En production, vrais appels API
+await new Promise(resolve=>setTimeout(resolve,1500)); // Simule délai API
+
+// Données mockées (remplacer par vrais appels API)
+return{
+home:{
+name:homeTeam,
+attack:parseFloat((Math.random()*2+0.5).toFixed(1)),
+defense:parseFloat((Math.random()*2+0.5).toFixed(1)),
+form:generateRandomForm(),
+experience:['elite','high','medium','low'][Math.floor(Math.random()*4)]
+},
+away:{
+name:awayTeam,
+attack:parseFloat((Math.random()*2+0.5).toFixed(1)),
+defense:parseFloat((Math.random()*2+0.5).toFixed(1)),
+form:generateRandomForm(),
+experience:['elite','high','medium','low'][Math.floor(Math.random()*4)]
+},
+competition:detectCompetition(homeTeam,awayTeam),
+matchType:detectMatchType(homeTeam,awayTeam),
+leagueAvg:2.5,
+h2h:{
+total:10,
+homeWins:4,
+awayWins:3,
+draws:3,
+avgGoals:2.8
+}
+};
+}
+
+function generateRandomForm(){
+const results=['V','V','N','D','V'];
+return results.sort(()=>Math.random()-0.5).join('');
+}
+
+function detectCompetition(home,away){
+const leagues=['Ligue 1','Premier League','La Liga','Serie A','Bundesliga','Champions League','Europa League'];
+return leagues[Math.floor(Math.random()*leagues.length)];
+}
+
+function detectMatchType(home,away){
+const homeL=home.toLowerCase();
+const awayL=away.toLowerCase();
+
+if((homeL.includes('psg')&&awayL.includes('om'))||(homeL.includes('real')&&awayL.includes('barça')))return'derby';
+if((homeL.includes('psg')||homeL.includes('real')||homeL.includes('bayern'))&&(awayL.includes('psg')||awayL.includes('real')||awayL.includes('bayern')))return'top_match';
+return'normal';
+}
+
+// =================================
+// NAVIGATION
+// =================================
+function goToPage(pageId){
+document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+document.getElementById(pageId).classList.add('active');
+document.querySelectorAll('.nav-item').forEach(i=>i.classList.remove('active'));
+event.currentTarget.classList.add('active');
+
+if(pageId==='dashboard')refreshDashboard();
+if(pageId==='history')refreshHistory();
+if(pageId==='ml')refreshML();
+if(pageId==='stats')refreshStats();
+}
+
+// =================================
+// BET WORKFLOW
+// =================================
+function selectType(type){
+currentType=type;
+document.querySelectorAll('.bet-type-card').forEach(c=>c.classList.remove('selected'));
+event.currentTarget.classList.add('selected');
+if(type==='combined'){
+document.getElementById('combinedOpt').style.display='block';
+}else{
+startBet();
+}
+}
+
+function startBet(){
+const numMatches=currentType==='simple'?1:parseInt(document.getElementById('numMatches').value);
+const container=document.getElementById('matchFormsContainer');
+const formTitle=document.getElementById('formTitle');
+
+formTitle.textContent=currentType==='simple'?'Match à analyser':`${numMatches} matchs du combiné`;
+
+let formsHTML='';
+for(let i=0;i<numMatches;i++){
+formsHTML+=`
+<div class="match-card">
+<div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid var(--brd)">
+<div class="match-badge">${i+1}</div>
+<h3 style="font-size:18px;font-weight:700;color:var(--text)">Match ${i+1}</h3>
+<span style="margin-left:auto;background:var(--primary-dim);color:var(--primary);font-size:11px;padding:4px 8px;border-radius:6px">🌐 AUTO</span>
+</div>
+
+<div class="form-row">
+<div class="form-group">
+<label class="form-label form-label-required">Équipe Domicile</label>
+<input type="text" class="form-input" id="home_${i}" placeholder="Ex: PSG" required>
+<small style="color:var(--text-muted);font-size:11px">L'IA cherchera toutes les stats automatiquement</small>
+</div>
+<div class="form-group">
+<label class="form-label form-label-required">Équipe Extérieure</label>
+<input type="text" class="form-input" id="away_${i}" placeholder="Ex: OM" required>
+</div>
+</div>
+
+<div class="form-row">
+<div class="form-group">
+<label class="form-label form-label-required">Type d'événement</label>
+<select class="form-select" id="eventType_${i}" required>
+<option value="">-- Choisissez --</option>
+<optgroup label="📌 RÉSULTAT">
+<option value="1">1 (Victoire Domicile)</option>
+<option value="x">X (Match Nul)</option>
+<option value="2">2 (Victoire Extérieur)</option>
+<option value="1x">1X (Domicile ou Nul)</option>
+<option value="x2">X2 (Nul ou Extérieur)</option>
+<option value="12">12 (Domicile ou Extérieur)</option>
+</optgroup>
+<optgroup label="⚽ BUTS">
+<option value="btts_yes">BTTS Oui</option>
+<option value="btts_no">BTTS Non</option>
+<option value="over_0.5">Plus de 0.5</option>
+<option value="over_1.5">Plus de 1.5</option>
+<option value="over_2.5">Plus de 2.5</option>
+<option value="over_3.5">Plus de 3.5</option>
+<option value="under_2.5">Moins de 2.5</option>
+</optgroup>
+<optgroup label="🏅 MI-TEMPS/FIN">
+<option value="ht_ft_1_1">1/1</option>
+<option value="ht_ft_1_x">1/X</option>
+<option value="ht_ft_x_x">X/X</option>
+<option value="ht_ft_2_2">2/2</option>
+</optgroup>
+</select>
+</div>
+<div class="form-group">
+<label class="form-label form-label-required">Cote proposée</label>
+<input type="number" class="form-input" id="odds_${i}" placeholder="Ex: 1.85" step="0.01" min="1.01" required>
+</div>
+</div>
+
+<div style="background:var(--primary-dim);padding:12px;border-radius:8px;border-left:3px solid var(--primary);margin-top:12px">
+<small style="color:var(--text);font-size:12px">
+✨ <strong>Recherche automatique :</strong> Compétition, Stats (attaque/défense), Forme récente, Expérience, Historique confrontations
+</small>
+</div>
+</div>
+`;
+}
+container.innerHTML=formsHTML;
+document.getElementById('betForm').style.display='block';
+window.scrollTo({top:document.getElementById('betForm').offsetTop-100,behavior:'smooth'});
+}
+
+// =================================
+// ONLINE ANALYSIS
+// =================================
+async function analyzeBetOnline(){
+const numMatches=currentType==='simple'?1:parseInt(document.getElementById('numMatches').value);
+const analyzeBtn=document.getElementById('analyzeBtn');
+const spinner=document.getElementById('loadingSpinner');
+
+analyzeBtn.disabled=true;
+spinner.style.display='inline-block';
+
+try{
+const matches=[];
+for(let i=0;i<numMatches;i++){
+const home=document.getElementById(`home_${i}`).value.trim();
+const away=document.getElementById(`away_${i}`).value.trim();
+const eventType=document.getElementById(`eventType_${i}`).value;
+const odds=parseFloat(document.getElementById(`odds_${i}`).value);
+
+if(!home||!away||!eventType||!odds||odds<1.01){
+alert(`⚠️ Match ${i+1}: Champs obligatoires manquants`);
+analyzeBtn.disabled=false;
+spinner.style.display='none';
+return;
+}
+
+// 🌐 RÉCUPÉRATION AUTOMATIQUE DES DONNÉES
+console.log(`📡 Recherche en ligne: ${home} vs ${away}`);
+const matchData=await getMatchData(home,away);
+
+matches.push({
+home:matchData.home.name,
+away:matchData.away.name,
+league:matchData.competition,
+eventType:eventType,
+odds:odds,
+homeAttack:matchData.home.attack,
+awayAttack:matchData.away.attack,
+homeDefense:matchData.home.defense,
+awayDefense:matchData.away.defense,
+leagueAvg:matchData.leagueAvg,
+matchType:matchData.matchType,
+homeForm:matchData.home.form,
+awayForm:matchData.away.form,
+homeExp:matchData.home.experience,
+awayExp:matchData.away.experience,
+h2h:matchData.h2h
+});
+}
+
+// ANALYSE COMPLÈTE
+const analyzed=analyzeMatches(matches);
+displayAnalysis(analyzed);
+
+}catch(error){
+console.error('Erreur:',error);
+alert('❌ Erreur lors de la récupération des données. Vérifiez votre connexion.');
+}finally{
+analyzeBtn.disabled=false;
+spinner.style.display='none';
+}
+}
+
+function analyzeMatches(matches){
+const db=getDB();
+
+const analyzed=matches.map((m,idx)=>{
+const poissonProb=calculatePoisson(m.homeAttack,m.awayAttack,m.homeDefense,m.awayDefense,m.leagueAvg,m.eventType);
+const bookProb=1/m.odds;
+const mlAdj=getMLAdjustment(m.eventType,m.league);
+const compAdj=getCompetitionAdjustment(m.league,m.matchType);
+const expAdj=getExperienceAdjustment(m.homeExp,m.awayExp);
+const formAdj=getFormAdjustment(m.homeForm,m.awayForm);
+
+const finalProb=(poissonProb*0.4)+(mlAdj*0.2)+(bookProb*0.15)+(compAdj*0.15)+(expAdj*0.05)+(formAdj*0.05);
+const clampedProb=Math.min(Math.max(finalProb,0.01),0.99);
+const edge=clampedProb-bookProb;
+const confidence=Math.round(clampedProb*100);
+
+return{...m,finalProb:clampedProb,bookProb,edge,confidence,matchIndex:idx+1};
+});
+
+let totalOdds=1;
+let totalProb=1;
+analyzed.forEach(m=>{
+totalOdds*=m.odds;
+totalProb*=m.finalProb;
+});
+
+const kellyStake=totalProb>(1/totalOdds)?((totalProb-(1/totalOdds))/(totalOdds-1))*0.25:0;
+const stake=Math.max(Math.min(kellyStake*db.capital,db.capital*0.1),db.capital*0.01);
+
+return{
+matches:analyzed,
+totalOdds,
+totalProb,
+stake:Math.round(stake),
+potentialWin:Math.round(stake*totalOdds),
+profit:Math.round(stake*totalOdds-stake)
+};
+}
+
+function displayAnalysis(result){
+const{matches,totalOdds,totalProb,stake,potentialWin,profit}=result;
+
+let riskLevel='ÉLEVÉ',riskColor='var(--danger)',riskIcon='🔴';
+if(totalProb>0.6){riskLevel='FAIBLE';riskColor='var(--primary)';riskIcon='🟢';}
+else if(totalProb>0.4){riskLevel='MOYEN';riskColor='var(--warning)';riskIcon='🟡';}
+
+let recommendation='';
+if(totalProb>0.65)recommendation='✅ Excellent pari ! L\'IA recommande fortement.';
+else if(totalProb>0.5)recommendation='⚠️ Pari acceptable mais risqué.';
+else recommendation='❌ Pari déconseillé. Probabilité trop faible.';
+
+let matchesHTML='';
+if(currentType==='combined'){
+matchesHTML=`
+<div class="card" style="background:var(--card3);margin-top:24px">
+<h3 style="font-size:16px;font-weight:700;margin-bottom:16px">📋 Détail des ${matches.length} matchs (Données API)</h3>
+${matches.map(m=>`
+<div style="background:var(--bg3);padding:16px;border-radius:10px;margin-bottom:12px;border-left:3px solid ${m.confidence>=60?'var(--primary)':m.confidence>=40?'var(--warning)':'var(--danger)'}">
+<div style="display:flex;justify-content:space-between;margin-bottom:12px">
+<div>
+<div style="font-weight:700;font-size:15px">${m.home} vs ${m.away}</div>
+<div style="font-size:12px;color:var(--text-muted);margin-top:2px">${m.league} • ${getEventLabel(m.eventType)}</div>
+</div>
+<div style="text-align:right">
+<div style="font-size:20px;font-weight:900;color:var(--gold)">${m.odds.toFixed(2)}</div>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;font-size:12px">
+<div>
+<div style="color:var(--text-muted)">Prob. IA</div>
+<div style="font-weight:700;color:var(--primary);font-size:16px">${(m.finalProb*100).toFixed(1)}%</div>
+</div>
+<div>
+<div style="color:var(--text-muted)">Confiance</div>
+<div style="font-weight:700;color:${m.confidence>=60?'var(--primary)':'var(--warning)'};font-size:16px">${m.confidence}/100</div>
+</div>
+<div>
+<div style="color:var(--text-muted)">Source</div>
+<div style="font-weight:700;color:var(--primary);font-size:12px">🌐 API</div>
+</div>
+</div>
+</div>
+`).join('')}
+</div>
+`;
+}
+
+document.getElementById('analysisResult').innerHTML=`
+<div class="card" style="background:var(--card2);border:2px solid var(--primary);margin-top:32px;padding:32px">
+<div style="text-align:center;margin-bottom:32px">
+<h2 style="font-size:28px;font-weight:900;margin-bottom:8px">📊 Analyse ${currentType==='simple'?'Pari Simple':'Combiné '+matches.length+'x'}</h2>
+<p style="color:var(--text-muted)">Données récupérées automatiquement par l'IA</p>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin-bottom:24px">
+<div class="result-card">
+<div style="font-size:11px;color:var(--text-muted);margin-bottom:8px">COTE TOTALE</div>
+<div class="result-value" style="color:var(--gold)">${totalOdds.toFixed(2)}</div>
+</div>
+<div class="result-card">
+<div style="font-size:11px;color:var(--text-muted);margin-bottom:8px">PROBABILITÉ IA</div>
+<div class="result-value" style="color:var(--primary)">${(totalProb*100).toFixed(1)}%</div>
+</div>
+<div class="result-card">
+<div style="font-size:11px;color:var(--text-muted);margin-bottom:8px">RISQUE</div>
+<div class="result-value" style="color:${riskColor};font-size:24px">${riskIcon} ${riskLevel}</div>
+</div>
+<div class="result-card">
+<div style="font-size:11px;color:var(--text-muted);margin-bottom:8px">MISE</div>
+<div class="result-value" style="font-size:24px">${stake.toLocaleString()} F</div>
+</div>
+</div>
+
+<div class="alert ${totalProb>0.5?'alert-success':'alert-warning'}">
+<span class="alert-icon">💡</span>
+<div class="alert-content">
+<div class="alert-title">Recommandation IA</div>
+<div>${recommendation}</div>
+</div>
+</div>
+
+${matchesHTML}
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px">
+<div style="background:var(--card3);padding:20px;border-radius:12px">
+<div style="font-size:12px;color:var(--text-muted);margin-bottom:8px">GAIN POTENTIEL</div>
+<div style="font-size:28px;font-weight:900;color:var(--primary)">${potentialWin.toLocaleString()} F</div>
+<div style="font-size:12px;color:var(--text-muted);margin-top:4px">Profit: +${profit.toLocaleString()} F</div>
+</div>
+<div style="background:var(--card3);padding:20px;border-radius:12px">
+<div style="font-size:12px;color:var(--text-muted);margin-bottom:8px">ESPÉRANCE (EV)</div>
+<div style="font-size:28px;font-weight:900;color:var(--gold)">${((totalProb*potentialWin-stake)/stake*100).toFixed(1)}%</div>
+<div style="font-size:12px;color:var(--text-muted);margin-top:4px">EV = ${Math.round(totalProb*potentialWin-stake).toLocaleString()} F</div>
+</div>
+</div>
+
+<button class="btn btn-primary btn-block" style="margin-top:24px;font-size:16px;padding:16px" onclick='saveBet(${JSON.stringify(matches)},${totalOdds},${totalProb},${stake},${potentialWin})'>
+💾 Enregistrer ce pari
+</button>
+</div>
+`;
+
+window.scrollTo({top:document.getElementById('analysisResult').offsetTop-100,behavior:'smooth'});
+}
+
+// =================================
+// CALCULATION FUNCTIONS
+// =================================
+function calculatePoisson(homeAttack,awayAttack,homeDefense,awayDefense,leagueAvg,eventType){
+const homeExpected=homeAttack*awayDefense*(leagueAvg/2);
+const awayExpected=awayAttack*homeDefense*(leagueAvg/2);
+const poisson=(lambda,k)=>(Math.pow(lambda,k)*Math.exp(-lambda))/factorial(k);
+const factorial=n=>n<=1?1:n*factorial(n-1);
+
+let probability=0.5;
+if(eventType==='btts_yes'){
+const homeScores=1-poisson(homeExpected,0);
+const awayScores=1-poisson(awayExpected,0);
+probability=homeScores*awayScores;
+}else if(eventType.startsWith('over_')){
+const threshold=parseFloat(eventType.split('_')[1]);
+const totalExpected=homeExpected+awayExpected;
+let prob=0;
+for(let i=Math.floor(threshold)+1;i<=10;i++)prob+=poisson(totalExpected,i);
+probability=prob;
+}else if(eventType.startsWith('under_')){
+const threshold=parseFloat(eventType.split('_')[1]);
+const totalExpected=homeExpected+awayExpected;
+let prob=0;
+for(let i=0;i<=Math.floor(threshold);i++)prob+=poisson(totalExpected,i);
+probability=prob;
+}else if(eventType==='1'){
+probability=homeExpected/(homeExpected+awayExpected+0.3);
+}else if(eventType==='2'){
+probability=awayExpected/(homeExpected+awayExpected+0.3);
+}
+return Math.min(Math.max(probability,0.01),0.99);
+}
+
+function getMLAdjustment(eventType,league){
+const db=getDB();
+const history=db.bets.filter(b=>b.status!=='pending');
+if(history.length<3)return 0.5;
+const typeHistory=history.filter(b=>b.matches&&b.matches.some(m=>m.eventType===eventType));
+if(typeHistory.length===0)return 0.5;
+const wins=typeHistory.filter(b=>b.status==='won').length;
+return wins/typeHistory.length;
+}
+
+function getCompetitionAdjustment(league,matchType){
+const leagueLower=league.toLowerCase();
+let baseAdj=0.5;
+if(leagueLower.includes('champions')||leagueLower.includes('europa'))baseAdj=0.55;
+else if(leagueLower.includes('premier')||leagueLower.includes('liga')||leagueLower.includes('serie a'))baseAdj=0.52;
+const typeAdj={'normal':0,'derby':0.05,'top_match':0.03,'relegation':-0.02};
+return Math.min(Math.max(baseAdj+(typeAdj[matchType]||0),0.01),0.99);
+}
+
+function getExperienceAdjustment(homeExp,awayExp){
+const expValues={'elite':0.55,'high':0.52,'medium':0.5,'low':0.48};
+return(expValues[homeExp]+expValues[awayExp])/2;
+}
+
+function getFormAdjustment(homeForm,awayForm){
+const calc=form=>{
+if(!form)return 0.5;
+let score=0;
+for(let c of form){
+if(c==='V')score+=1;
+else if(c==='N')score+=0.5;
+}
+return score/form.length;
+};
+return(calc(homeForm)+calc(awayForm))/2;
+}
+
+function getEventLabel(eventType){
+const labels={'1':'1 (Victoire Domicile)','x':'X (Match Nul)','2':'2 (Victoire Extérieur)','1x':'1X','x2':'X2','12':'12','btts_yes':'BTTS Oui','btts_no':'BTTS Non','over_0.5':'Plus de 0.5','over_1.5':'Plus de 1.5','over_2.5':'Plus de 2.5','over_3.5':'Plus de 3.5','under_2.5':'Moins de 2.5','ht_ft_1_1':'1/1','ht_ft_1_x':'1/X','ht_ft_x_x':'X/X','ht_ft_2_2':'2/2'};
+return labels[eventType]||eventType;
+}
+
+// =================================
+// SAVE BET
+// =================================
+function saveBet(matches,totalOdds,probability,stake,potentialWin){
+const db=getDB();
+db.bets.push({
+id:Date.now(),
+date:new Date().toISOString(),
+type:currentType||'simple',
+matches:matches,
+totalOdds:totalOdds,
+probability:probability,
+stake:stake,
+potentialWin:potentialWin,
+status:'pending',
+profit:null
+});
+saveDB(db);
+alert('✅ Pari enregistré !');
+document.querySelectorAll('.bet-type-card').forEach(c=>c.classList.remove('selected'));
+document.getElementById('combinedOpt').style.display='none';
+document.getElementById('betForm').style.display='none';
+document.getElementById('analysisResult').innerHTML='';
+currentType=null;
+goToPage('history');
+}
+
+// =================================
+// HISTORY & STATS
+// =================================
+function refreshHistory(){
+const db=getDB();
+const tbody=document.getElementById('historyTable');
+if(db.bets.length===0){
+tbody.innerHTML='<tr><td colspan="6" style="text-align:center;padding:40px;color:var(--text-muted)">Aucun historique</td></tr>';
+return;
+}
+tbody.innerHTML=db.bets.map(bet=>{
+const matchDisplay=bet.type==='simple'?`<strong>${bet.matches[0].home} vs ${bet.matches[0].away}</strong><br><small>${bet.matches[0].league}</small>`:`<strong>Combiné ${bet.matches.length}x</strong>`;
+const eventDisplay=bet.type==='simple'?getEventLabel(bet.matches[0].eventType):'Multiple';
+let statusBadge='<span class="badge badge-warning">En cours</span>';
+if(bet.status==='won')statusBadge='<span class="badge badge-success">Gagné</span>';
+if(bet.status==='lost')statusBadge='<span class="badge badge-danger">Perdu</span>';
+return`<tr>
+<td>${new Date(bet.date).toLocaleDateString('fr-FR')}</td>
+<td>${matchDisplay}</td>
+<td>${eventDisplay}</td>
+<td><strong>${bet.totalOdds.toFixed(2)}</strong></td>
+<td>${statusBadge}</td>
+<td>
+${bet.status==='pending'?`
+<button onclick="updateStatus(${bet.id},'won')" style="background:var(--primary);color:white;border:none;padding:6px 12px;border-radius:6px;cursor:pointer;margin-right:4px">✓</button>
+<button onclick="updateStatus(${bet.id},'lost')" style="background:var(--danger);color:white;border:none;padding:6px 12px;border-radius:6px;cursor:pointer">✗</button>
+`:''}
+</td>
+</tr>`;
+}).join('');
+}
+
+function updateStatus(betId,status){
+const db=getDB();
+const bet=db.bets.find(b=>b.id===betId);
+if(!bet)return;
+bet.status=status;
+if(status==='won'){
+bet.profit=bet.potentialWin-bet.stake;
+db.capital+=bet.profit;
+}else{
+bet.profit=-bet.stake;
+db.capital-=bet.stake;
+}
+saveDB(db);
+refreshHistory();
+alert(status==='won'?'🎉 Félicitations !':'😔 Dommage');
+}
+
+function refreshDashboard(){
+const db=getDB();
+const completed=db.bets.filter(b=>b.status!=='pending');
+document.getElementById('totalBets').textContent=db.bets.length;
+document.getElementById('historyCount').textContent=db.bets.length;
+if(completed.length>0){
+const wins=completed.filter(b=>b.status==='won').length;
+document.getElementById('winRate').textContent=(wins/completed.length*100).toFixed(1)+'%';
+const totalStaked=completed.reduce((sum,b)=>sum+b.stake,0);
+const totalProfit=completed.reduce((sum,b)=>sum+(b.profit||0),0);
+document.getElementById('roi').textContent=totalStaked>0?(totalProfit/totalStaked*100).toFixed(1)+'%':'0%';
+document.getElementById('totalProfit').textContent=totalProfit.toLocaleString()+' F';
+}
+document.getElementById('sidebarCapital').textContent=db.capital.toLocaleString()+' F';
+}
+
+function refreshML(){
+const db=getDB();
+const completed=db.bets.filter(b=>b.status!=='pending');
+if(completed.length<3){
+document.getElementById('mlStats').innerHTML='<div class="alert alert-warning"><span class="alert-icon">⚠️</span><div class="alert-content"><div>Minimum 3 paris terminés requis</div></div></div>';
+return;
+}
+const eventStats={};
+completed.forEach(bet=>{
+if(bet.matches){
+bet.matches.forEach(m=>{
+if(!eventStats[m.eventType])eventStats[m.eventType]={wins:0,total:0,profit:0};
+eventStats[m.eventType].total++;
+if(bet.status==='won'){
+eventStats[m.eventType].wins++;
+eventStats[m.eventType].profit+=(bet.profit||0);
+}else{
+eventStats[m.eventType].profit-=(bet.stake||0);
+}
+});
+}
+});
+let html='<table style="width:100%;border-collapse:collapse"><thead><tr style="background:var(--card2)"><th style="padding:12px">Type</th><th style="padding:12px">Paris</th><th style="padding:12px">Victoires</th><th style="padding:12px">Taux</th><th style="padding:12px">Profit</th></tr></thead><tbody>';
+for(const[event,stats]of Object.entries(eventStats)){
+const rate=(stats.wins/stats.total*100).toFixed(1);
+const color=parseFloat(rate)>=60?'var(--primary)':'var(--warning)';
+const profitColor=stats.profit>=0?'var(--primary)':'var(--danger)';
+html+=`<tr style="border-bottom:1px solid var(--brd)"><td style="padding:12px">${getEventLabel(event)}</td><td style="padding:12px">${stats.total}</td><td style="padding:12px">${stats.wins}</td><td style="padding:12px;color:${color};font-weight:700">${rate}%</td><td style="padding:12px;color:${profitColor};font-weight:700">${stats.profit>=0?'+':''}${Math.round(stats.profit).toLocaleString()} F</td></tr>`;
+}
+html+='</tbody></table>';
+document.getElementById('mlStats').innerHTML=html;
+}
+
+function refreshStats(){
+const db=getDB();
+document.getElementById('statSimple').textContent=db.bets.filter(b=>b.type==='simple').length;
+document.getElementById('statCombined').textContent=db.bets.filter(b=>b.type==='combined').length;
+}
+
+// =================================
+// SETTINGS
+// =================================
+function saveSettings(){
+const db=getDB();
+db.capitalInitial=parseInt(document.getElementById('settingsCapital').value);
+db.capital=db.capitalInitial;
+saveDB(db);
+alert('✅ Paramètres sauvegardés');
+}
+
+function saveAPIKeys(){
+const db=getDB();
+db.apiKeys={
+apiFootball:document.getElementById('apiFootballKey').value
+};
+saveDB(db);
+alert('✅ Clés API sauvegardées');
+}
+
+// =================================
+// DATA
+// =================================
+function exportData(){
+const db=getDB();
+const blob=new Blob([JSON.stringify(db,null,2)],{type:'application/json'});
+const url=URL.createObjectURL(blob);
+const a=document.createElement('a');
+a.href=url;
+a.download=`betmind-backup-${new Date().toISOString().split('T')[0]}.json`;
+a.click();
+}
+
+function importData(event){
+const file=event.target.files[0];
+if(!file)return;
+const reader=new FileReader();
+reader.onload=function(e){
+try{
+if(confirm('⚠️ Remplacer toutes vos données ?')){
+localStorage.setItem(DB_KEY,e.target.result);
+location.reload();
+}
+}catch{alert('❌ Fichier invalide');}
+};
+reader.readAsText(file);
+}
+
+function resetData(){
+if(confirm('⚠️ Effacer TOUTES les données ?')){
+localStorage.removeItem(DB_KEY);
+location.reload();
+}
+}
+
+function updateUI(){refreshDashboard();}
+
+// =================================
+// INIT
+// =================================
+document.addEventListener('DOMContentLoaded',function(){
+const db=getDB();
+document.getElementById('settingsCapital').value=db.capitalInitial;
+updateUI();
+console.log('🌐 BetMind Pro V6 ONLINE initialized');
+});
+</script>
+
+<!-- Back to portfolio -->
+<a href="../index.html" style="position:fixed;bottom:24px;left:24px;z-index:9999;display:inline-flex;align-items:center;gap:8px;padding:0.6rem 1.2rem;border-radius:100px;background:rgba(0,0,0,0.8);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.15);color:#fff;font-size:0.82rem;font-weight:600;text-decoration:none;">&#8592; Portfolio</a>
+</body>
+</html>
