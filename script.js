@@ -100,14 +100,71 @@
       }
     });
 
-    navAnchors.forEach(a => {
+  navAnchors.forEach(a => {
       const isActive = a.getAttribute('href') === '#' + currentId;
-      a.style.color = isActive ? 'var(--text)' : '';
+      a.classList.toggle('active', isActive);
     });
   }
 
   if (sections.length && navAnchors.length) {
-    window.addEventListener('scroll', updateActiveNav, { passive: true });
+    window.addEventListener('scroll', debounce(updateActiveNav, 10), { passive: true });
+  }
+
+  /* ──────────────────────────────────────────────
+     6. SMOOTH SCROLLING
+  ────────────────────────────────────────────── */
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      const targetId = this.getAttribute('href');
+      const target = document.querySelector(targetId);
+      
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+        // Close mobile nav if open
+        closeMobile();
+      }
+    });
+  });
+
+  /* ──────────────────────────────────────────────
+     7. BACK TO TOP BUTTON
+  ────────────────────────────────────────────── */
+  let backToTopBtn = document.querySelector('.back-to-top');
+  if (!backToTopBtn) {
+    backToTopBtn = document.createElement('button');
+    backToTopBtn.className = 'back-to-top';
+    backToTopBtn.innerHTML = '↑';
+    backToTopBtn.setAttribute('aria-label', 'Retour en haut');
+    backToTopBtn.setAttribute('title', 'Retour en haut de page');
+    document.body.appendChild(backToTopBtn);
+  }
+
+  backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+
+  window.addEventListener('scroll', debounce(() => {
+    backToTopBtn.classList.toggle('visible', window.scrollY > 400);
+  }, 10), { passive: true });
+
+  // Debounce utility
+  function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
   }
 
   /* ──────────────────────────────────────────────
@@ -117,43 +174,79 @@
   const formWrap   = document.getElementById('contact-form-wrap');
   const formSuccess = document.getElementById('form-success');
 
-  function handleSubmit() {
-    if (!formWrap || !formSuccess) return;
+  async function handleSubmit() {
+    if (!formWrap || !formSuccess || !submitBtn) return;
 
-    const fname   = document.getElementById('fname');
-    const email   = document.getElementById('email');
+    // Get all form fields
+    const fname = document.getElementById('fname');
+    const lname = document.getElementById('lname');
+    const email = document.getElementById('email');
+    const service = document.getElementById('service');
     const message = document.getElementById('message');
 
     if (!fname || !email || !message) return;
 
-    const fnameVal   = fname.value.trim();
-    const emailVal   = email.value.trim();
+    const fnameVal = fname.value.trim();
+    const lnameVal = lname ? lname.value.trim() : '';
+    const emailVal = email.value.trim();
+    const serviceVal = service ? service.value : '';
     const messageVal = message.value.trim();
 
-    // Basic validation
+    // Enhanced validation
     if (!fnameVal || !emailVal || !messageVal) {
-      alert('Veuillez remplir au moins votre prénom, email et message.');
+      alert('Veuillez remplir les champs obligatoires: prénom, email et message.');
       return;
     }
 
-    // Basic email format check
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(emailVal)) {
+  
+    if (!emailVal.includes('@')) {
       alert('Veuillez entrer une adresse email valide.');
       return;
     }
 
-    // NOTE: Pour la production, remplacez cette section par un appel
-    // vers un service comme Formspree (https://formspree.io) ou EmailJS.
-    // Exemple Formspree :
-    //   fetch('https://formspree.io/f/YOUR_FORM_ID', {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify({ name: fnameVal, email: emailVal, message: messageVal })
-    //   });
+    // Set loading state
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = 'Envoi... <span class="spinner"></span>';
 
-    formWrap.style.display = 'none';
-    formSuccess.style.display = 'block';
+    const accessKey = 'ef1d518a-732f-43cc-b7b3-8a5c2b207ad2';
+    const subject = serviceVal ? `Nouveau message - ${serviceVal.charAt(0).toUpperCase() + serviceVal.slice(1)}` : 'Nouveau message depuis le portfolio';
+    
+    const formData = {
+      access_key: accessKey,
+      name: `${fnameVal} ${lnameVal}`.trim(),
+      email: emailVal,
+      service: serviceVal,
+      message: messageVal,
+      subject: subject
+    };
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+        formWrap.style.display = 'none';
+        formSuccess.style.display = 'block';
+        // Reset form
+        if (fname) fname.value = '';
+        if (lname) lname.value = '';
+        if (email) email.value = '';
+        if (service) service.value = '';
+        if (message) message.value = '';
+      } else {
+        throw new Error('Erreur serveur');
+      }
+    } catch (error) {
+      alert('Erreur lors de l\'envoi. Veuillez réessayer ou me contacter par WhatsApp.');
+      console.error('Form error:', error);
+    } finally {
+      // Reset button
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = 'Envoyer le message\\n              <svg width=\\"16\\" height=\\"16\\" viewBox=\\"0 0 24 24\\" fill=\\"none\\" stroke=\\"currentColor\\" stroke-width=\\"2.5\\" aria-hidden=\\"true\\"><path d=\\"M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z\\"/></svg>';
+    }
   }
 
   // Expose for the inline onclick on the button

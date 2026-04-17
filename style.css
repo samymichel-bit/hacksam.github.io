@@ -460,11 +460,16 @@ section {
 
 .about-card {
   background: var(--bg-card);
+  background-image: url('images/ma-photo.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: 2.5rem;
   position: relative;
   overflow: hidden;
+  z-index: 1;
 }
 
 .about-card::before {
@@ -477,8 +482,24 @@ section {
   filter: blur(80px);
   opacity: 0.08;
   pointer-events: none;
+  z-index: 3;
+
 }
 
+.about-card::after {
+content: '';
+position: absolute;
+top: 0; left: 0; right: 0; bottom: 0;
+background: rgba(0, 0, 0, 0.65);
+border-radius: inherit;
+z-index: -1;
+pointer-events: none;
+}
+
+.about-card > * {
+  position: relative;
+  z-index: 2;
+}
 .avatar-wrap {
   width: 100px; height: 100px;
   border-radius: 50%;
