@@ -1,500 +1,608 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Samy Michel — Développeur Web & Créateur de Solutions Digitales au Cameroun. Sites modernes qui attirent et convertissent vos clients." />
-  <meta name="keywords" content="développeur web Cameroun, freelance Cameroun, site vitrine, Django, Python, HackSam" />
-  <meta name="author" content="Samy Michel — HackSam" />
-
-  <!-- Open Graph -->
-  <meta property="og:title"       content="HackSam · Développeur Web & Solutions Digitales" />
-  <meta property="og:description" content="Samy Michel — Développeur Web freelance au Cameroun. Sites modernes qui attirent et convertissent vos clients." />
-  <meta property="og:type"        content="website" />
-  <meta property="og:url"         content="https://hacksam.dev" />
-
-  <title>HackSam · Développeur Web & Solutions Digitales</title>
-
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
-
-  <!-- Stylesheet -->
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HackSam Digital Solutions | Sites Web, IA & Automatisation</title>
+  <meta name="description" content="HackSam conçoit des sites web, applications, solutions IA et automatisations pour transformer vos idées en projets digitaux performants.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://hacksam.github.io/">
+  <meta property="og:title" content="HackSam Digital Solutions | Sites Web, IA & Automatisation">
+  <meta property="og:description" content="HackSam conçoit des sites web, applications, solutions IA et automatisations pour transformer vos idées en projets digitaux performants.">
+  <meta property="og:image" content="images/ma-photo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="HackSam Digital Solutions | Sites Web, IA & Automatisation">
+  <meta name="twitter:description" content="HackSam conçoit des sites web, applications, solutions IA et automatisations pour transformer vos idées en projets digitaux performants.">
+  <meta name="twitter:image" content="images/ma-photo.png">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23FF7A00'/%3E%3Ctext x='32' y='42' font-family='Inter,Arial,sans-serif' font-size='30' font-weight='800' fill='white' text-anchor='middle'%3EH%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- ============ NAVBAR ============ -->
-  <nav class="navbar" id="navbar" role="navigation" aria-label="Navigation principale">
+  <!-- ═══════════════ NAVBAR ═══════════════ -->
+  <nav class="navbar" id="navbar">
     <div class="container nav-inner">
-      <a href="#hero" class="nav-logo" aria-label="HackSam — Accueil">Hack<span>Sam</span></a>
-
-      <ul class="nav-links" role="list">
+      <a href="#hero" class="nav-logo">
+        <img src="images/ma-photo.png" alt="HackSam" class="nav-logo-img">
+        <span class="nav-logo-text">Hack<span>Sam</span></span>
+      </a>
+      <ul class="nav-links">
         <li><a href="#about">À propos</a></li>
-        <li><a href="#skills">Compétences</a></li>
-        <li><a href="#projects">Projets</a></li>
-        <li><a href="#services">Services</a></li>
-        <li>
-          <a href="#contact" class="btn btn-primary" style="padding:0.55rem 1.2rem;border-radius:100px;font-size:0.85rem;">
-            Me contacter
-          </a>
-        </li>
+        <li><a href="#competences">Expertise</a></li>
+        <li><a href="#projects">Réalisations</a></li>
+        <li><a href="#process">Processus</a></li>
+        <li><a href="#contact" class="btn btn-primary btn-sm">Démarrer un projet</a></li>
       </ul>
-
-      <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobileNav">
+      <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
 
-  <!-- Mobile nav overlay -->
-  <div class="mobile-nav" id="mobileNav" role="dialog" aria-modal="true" aria-label="Menu mobile">
+  <!-- Mobile Nav Overlay -->
+  <div class="mobile-nav" id="mobileNav">
     <a href="#about">À propos</a>
-    <a href="#skills">Compétences</a>
-    <a href="#projects">Projets</a>
-    <a href="#services">Services</a>
+    <a href="#competences">Expertise</a>
+    <a href="#projects">Réalisations</a>
+    <a href="#process">Processus</a>
     <a href="#contact">Contact</a>
+    <a href="#contact" class="btn btn-primary" style="margin-top:1rem;">Démarrer un projet</a>
   </div>
 
-  <!-- ============ HERO ============ -->
-  <section id="hero" aria-label="Introduction">
-    <div class="hero-bg" aria-hidden="true">
+  <!-- ═══════════════ 1. HERO ═══════════════ -->
+  <section id="hero">
+    <div class="hero-bg">
       <div class="orb orb-1"></div>
       <div class="orb orb-2"></div>
     </div>
-    <div class="container">
+    <div class="container hero-grid">
       <div class="hero-content">
-        <div class="hero-badge" aria-label="Disponibilité">
-          <span class="dot" aria-hidden="true"></span>
-          Disponible pour de nouveaux projets · Cameroun 🇨🇲
+        <div class="hero-badge reveal">
+          <span class="dot"></span>
+          Disponible pour de nouveaux projets digitaux
         </div>
-
-        <h1 class="hero-title">
-          <span class="line-wrap"><span class="line-inner">Je crée des sites web</span></span>
-          <span class="line-wrap"><span class="line-inner accent">qui attirent</span></span>
-          <span class="line-wrap"><span class="line-inner">&amp; convertissent.</span></span>
+        <h1 class="hero-title reveal reveal-delay-1">
+          Transformez vos idées en <span class="accent">solutions digitales</span> performantes.
         </h1>
-
-        <p class="hero-sub">
-          Samy Michel — Développeur Web &amp; Créateur de Solutions Digitales.
-          Je transforme vos idées en expériences digitales modernes, rapides et efficaces.
+        <p class="hero-sub reveal reveal-delay-2">
+          Nous concevons des sites web, des applications, des solutions d'intelligence artificielle et des automatisations sur mesure pour accélérer la croissance de votre entreprise.
         </p>
-
-        <div class="hero-cta">
-          <a href="#projects" class="btn btn-primary">
-            Voir mes projets
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
-          <a href="#contact" class="btn btn-outline">Me contacter</a>
+        <div class="hero-cta reveal reveal-delay-3">
+          <a href="#contact" class="btn btn-primary">Démarrer un projet</a>
+          <a href="#projects" class="btn btn-outline">Voir nos réalisations</a>
         </div>
-
-        <div class="hero-stats" aria-label="Statistiques">
-          <div class="stat-item">
+        <div class="hero-stats reveal reveal-delay-3">
+          <div class="stat">
             <div class="stat-num">10<span>+</span></div>
             <div class="stat-label">Projets livrés</div>
           </div>
-          <div class="stat-item">
+          <div class="stat">
             <div class="stat-num">5<span>+</span></div>
             <div class="stat-label">Technologies maîtrisées</div>
           </div>
-          <div class="stat-item">
+          <div class="stat">
             <div class="stat-num">100<span>%</span></div>
             <div class="stat-label">Clients satisfaits</div>
           </div>
         </div>
       </div>
+      <div class="hero-visual reveal reveal-delay-2">
+        <div class="visual-mockup">
+          <div class="mockup-browser">
+            <div class="mockup-bar">
+              <span class="dot-red"></span>
+              <span class="dot-yellow"></span>
+              <span class="dot-green"></span>
+              <div class="mockup-url">hacksam.dev</div>
+            </div>
+            <div class="mockup-content">
+              <div class="mock-line w-60"></div>
+              <div class="mock-line w-90"></div>
+              <div class="mock-line w-45"></div>
+              <div class="mock-block"></div>
+              <div class="mock-line w-70"></div>
+            </div>
+          </div>
+          <div class="mockup-phone">
+            <div class="phone-notch"></div>
+            <div class="phone-content">
+              <div class="mock-line w-50"></div>
+              <div class="mock-line w-80"></div>
+              <div class="mock-block-sm"></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- ============ ABOUT ============ -->
-  <section id="about" aria-label="À propos">
+  <!-- ═══════════════ 2. À PROPOS ═══════════════ -->
+  <section id="about">
     <div class="container">
       <div class="about-grid">
-
-        <!-- Visual card -->
         <div class="about-visual reveal">
-          <div class="about-card">
-            <div class="avatar-wrap" aria-label="Avatar SM">SM</div>
-            <div class="about-name">Samy Michel</div>
-            <div class="about-role">Développeur Web Freelance</div>
-            <div class="about-location">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 1 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              Yaoundé, Cameroun
-            </div>
-            <div class="tag-list" aria-label="Technologies">
-              <span class="tag">Python</span>
-              <span class="tag">Django</span>
-              <span class="tag">Flask</span>
-              <span class="tag">FastAPI</span>
-              <span class="tag">Vue.js</span>
-              <span class="tag">Tailwind CSS</span>
-              <span class="tag">HTML/CSS/JS</span>
+          <div class="about-image-wrapper">
+            <img src="images/ma-photo.png" alt="HackSam Digital Solutions" class="about-main-photo" loading="lazy">
+            <div class="about-float-badge">
+              <span class="dot"></span>
+              Partenaire digital de confiance
             </div>
           </div>
         </div>
-
-        <!-- Text -->
-        <div class="about-text reveal reveal-delay-1">
-          <span class="section-label">À propos</span>
-          <h2 class="section-title">Passionné par le web,<br/>orienté résultats.</h2>
-          <p>
-            Développeur web freelance basé au Cameroun, je conçois des solutions digitales
-            sur-mesure pour les entrepreneurs, PME et startups qui souhaitent se démarquer en ligne.
+        <div class="about-content reveal reveal-delay-1">
+          <span class="section-label">À propos de HackSam</span>
+          <h2 class="section-title">Votre partenaire de transformation numérique</h2>
+          <p class="section-sub">
+            HackSam accompagne les particuliers, entrepreneurs et entreprises dans la conception, le développement et la transformation de leurs projets numériques. Nous combinons expertise technique et vision stratégique pour livrer des produits qui créent de la valeur réelle.
           </p>
-          <p>
-            Mon approche : comprendre vos objectifs business avant d'écrire une seule ligne de code.
-            Je combine expertise technique et sens du design pour livrer des produits qui
-            <strong style="color:var(--text)">performent vraiment</strong>.
+          <p class="section-sub" style="margin-top:1rem;">
+            Notre approche : comprendre vos objectifs business avant d'écrire une seule ligne de code. Chaque solution est pensée pour performer, durer et évoluer avec votre activité.
           </p>
-          <p>
-            Curieux et autodidacte, j'apprends rapidement de nouvelles technologies et je m'adapte
-            aux besoins de chaque projet. La résolution créative de problèmes est mon moteur.
-          </p>
-
           <div class="about-values">
             <div class="value-item">
-              <div class="value-icon" aria-hidden="true">⚡</div>
+              <div class="value-icon">🎯</div>
               <div>
-                <div class="value-label">Livraison rapide</div>
-                <div class="value-desc">Projets livrés dans les délais</div>
+                <div class="value-label">Orienté Résultats</div>
+                <div class="value-desc">Chaque fonctionnalité sert un objectif business concret.</div>
               </div>
             </div>
             <div class="value-item">
-              <div class="value-icon" aria-hidden="true">🎯</div>
+              <div class="value-icon">⚡</div>
               <div>
-                <div class="value-label">Orienté résultats</div>
-                <div class="value-desc">Code qui crée de la valeur</div>
+                <div class="value-label">Rapidité & Qualité</div>
+                <div class="value-desc">Livrables dans les délais, code propre et maintenable.</div>
               </div>
             </div>
             <div class="value-item">
-              <div class="value-icon" aria-hidden="true">📱</div>
+              <div class="value-icon">📱</div>
               <div>
-                <div class="value-label">Mobile-first</div>
-                <div class="value-desc">Optimisé tous appareils</div>
+                <div class="value-label">Mobile-First</div>
+                <div class="value-desc">Optimisé pour tous les appareils et toutes les résolutions.</div>
               </div>
             </div>
             <div class="value-item">
-              <div class="value-icon" aria-hidden="true">🔒</div>
+              <div class="value-icon">🔒</div>
               <div>
-                <div class="value-label">Code propre</div>
-                <div class="value-desc">Maintenable &amp; sécurisé</div>
+                <div class="value-label">Sécurité & Fiabilité</div>
+                <div class="value-desc">Code sécurisé, tests rigoureux et maintenance continue.</div>
               </div>
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- ============ SKILLS ============ -->
-  <section id="skills" aria-label="Compétences techniques">
+  <!-- ═══════════════ 3. COMPÉTENCES / SERVICES ═══════════════ -->
+  <section id="competences" class="bg-alt">
     <div class="container">
-      <div class="skills-header reveal">
-        <span class="section-label">Compétences</span>
-        <h2 class="section-title">Ma stack technique</h2>
-        <p class="section-sub">Des outils choisis pour construire des solutions robustes, scalables et modernes.</p>
+      <div class="section-header reveal">
+        <span class="section-label">Nos Expertises</span>
+        <h2 class="section-title">Des compétences pointues pour des résultats concrets</h2>
+        <p class="section-sub">Nous ne nous contentons pas de suivre les tendances. Nous maîtrisons les technologies qui résolvent réellement vos problèmes business.</p>
       </div>
 
-      <div class="skills-grid">
-        <div class="skill-card reveal">
-          <div class="skill-card-icon" aria-hidden="true">🎨</div>
-          <h4>Frontend</h4>
-          <div class="skill-pills" aria-label="Compétences Frontend">
-            <span class="skill-pill">HTML5</span>
-            <span class="skill-pill">CSS3</span>
-            <span class="skill-pill">JavaScript</span>
-            <span class="skill-pill">Vue.js</span>
-            <span class="skill-pill">Responsive Design</span>
+      <div class="skills-bento">
+        <!-- Featured: IA & Automatisation -->
+        <div class="skill-card skill-featured reveal">
+          <div class="skill-icon-box">🤖</div>
+          <div class="skill-content">
+            <h3>Intelligence Artificielle & Automatisation</h3>
+            <p>Création d'agents IA, assistants intelligents, bots WhatsApp Business et automatisation complète de vos workflows pour multiplier votre productivité par 10.</p>
+            <div class="skill-tags">
+              <span>Agents IA</span>
+              <span>Assistants intelligents</span>
+              <span>Bots WhatsApp Business</span>
+              <span>Automatisation de workflows</span>
+              <span>Intégration API IA</span>
+            </div>
           </div>
         </div>
 
+        <!-- Développement Web -->
         <div class="skill-card reveal reveal-delay-1">
-          <div class="skill-card-icon" aria-hidden="true">⚙️</div>
-          <h4>Backend</h4>
-          <div class="skill-pills" aria-label="Compétences Backend">
-            <span class="skill-pill">Python</span>
-            <span class="skill-pill">Django</span>
-            <span class="skill-pill">Flask</span>
-            <span class="skill-pill">FastAPI</span>
-            <span class="skill-pill">REST API</span>
+          <div class="skill-icon-box">💻</div>
+          <div class="skill-content">
+            <h3>Développement Web</h3>
+            <p>Sites vitrines professionnels, applications web complexes et plateformes SaaS rapides, sécurisées et optimisées pour la conversion.</p>
+            <div class="skill-tags">
+              <span>Sites vitrines</span>
+              <span>Applications web</span>
+              <span>E-commerce</span>
+              <span>Tableaux de bord</span>
+            </div>
           </div>
         </div>
 
+        <!-- Mobile -->
         <div class="skill-card reveal reveal-delay-2">
-          <div class="skill-card-icon" aria-hidden="true">🛠️</div>
-          <h4>Outils &amp; DevOps</h4>
-          <div class="skill-pills" aria-label="Outils et DevOps">
-            <span class="skill-pill">Git</span>
-            <span class="skill-pill">GitHub</span>
-            <span class="skill-pill">VS Code</span>
-            <span class="skill-pill">Netlify</span>
-            <span class="skill-pill">GitHub Pages</span>
+          <div class="skill-icon-box">📱</div>
+          <div class="skill-content">
+            <h3>Applications Mobiles</h3>
+            <p>Développement d'applications mobiles Android et iOS performantes, avec une expérience utilisateur fluide et intuitive.</p>
+            <div class="skill-tags">
+              <span>Android</span>
+              <span>iOS</span>
+              <span>Cross-platform</span>
+              <span>UI/UX Mobile</span>
+            </div>
           </div>
         </div>
 
-        <div class="skill-card reveal reveal-delay-3">
-          <div class="skill-card-icon" aria-hidden="true">✨</div>
-          <h4>Bonus &amp; Soft Skills</h4>
-          <div class="skill-pills" aria-label="Soft skills">
-            <span class="skill-pill">SEO de base</span>
-            <span class="skill-pill">Intégration API</span>
-            <span class="skill-pill">UI/UX basique</span>
-            <span class="skill-pill">Résolution de problèmes</span>
-            <span class="skill-pill">Apprentissage rapide</span>
+        <!-- Logiciels sur mesure -->
+        <div class="skill-card reveal reveal-delay-1">
+          <div class="skill-icon-box">⚙️</div>
+          <div class="skill-content">
+            <h3>Logiciels Sur Mesure</h3>
+            <p>Création de logiciels, outils de gestion et solutions personnalisées adaptés à vos processus métiers uniques.</p>
+            <div class="skill-tags">
+              <span>Solutions SaaS</span>
+              <span>Outils de gestion</span>
+              <span>API REST</span>
+              <span>Python / Django</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Infrastructure -->
+        <div class="skill-card reveal reveal-delay-2">
+          <div class="skill-icon-box">🚀</div>
+          <div class="skill-content">
+            <h3>Infrastructure & Maintenance</h3>
+            <p>Hébergement web, gestion de noms de domaine, refonte de sites existants et support technique continu pour une présence en ligne sans faille.</p>
+            <div class="skill-tags">
+              <span>Hébergement web</span>
+              <span>Noms de domaine</span>
+              <span>Refonte de sites</span>
+              <span>Support technique</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ PROJECTS ============ -->
-  <section id="projects" aria-label="Projets réalisés">
+  <!-- ═══════════════ 4. RÉALISATIONS ═══════════════ -->
+  <section id="projects">
     <div class="container">
-      <div class="projects-header">
-        <div class="reveal">
-          <span class="section-label">Projets</span>
-          <h2 class="section-title">Ce que j'ai créé</h2>
-        </div>
-        <p class="section-sub reveal" style="margin-bottom:0;">Quelques de mes Solutions concrètes, livrées avec soin.</p>
+      <div class="section-header reveal">
+        <span class="section-label">Portfolio</span>
+        <h2 class="section-title">Solutions concrètes, résultats mesurables</h2>
+        <p class="section-sub">Chaque projet est une réponse précise à un besoin business. Voici ce que nous avons livré.</p>
       </div>
 
       <div class="projects-grid">
-
-        <!-- Projet 1 : Zangalewe -->
+        <!-- Projet 1 -->
         <article class="project-card reveal">
-          <div class="project-thumbnail">
-            <div class="project-thumb-bg p-zangalewe" aria-hidden="true">🍽️</div>
+          <div class="project-thumbnail p-zangalewe">
+            <div class="project-thumb-icon">🍽️</div>
+            <div class="project-overlay">
+              <a href="projects/zangalewe.html" class="btn btn-primary btn-sm">Voir le projet</a>
+            </div>
           </div>
           <div class="project-body">
-            <div class="project-category">Site Restaurant</div>
+            <span class="project-category">Site Vitrine Premium</span>
             <h3 class="project-title">Zangalewe Bar-Lounge</h3>
-            <p class="project-desc">
-              Site vitrine haut de gamme pour un restaurant-lounge à Yaoundé, Bastos.
-              Design luxueux, menu en ligne, galerie et réservation via WhatsApp.
-            </p>
-            <div class="project-features" aria-label="Fonctionnalités">
-              <span class="feature-tag">Fine dining</span>
-              <span class="feature-tag">Galerie photos</span>
-              <span class="feature-tag">Réservation WhatsApp</span>
-              <span class="feature-tag">Responsive</span>
-              <span class="feature-tag">Dark luxury</span>
+            <p class="project-desc">Site haut de gamme pour un restaurant-lounge à Yaoundé. Design luxueux, menu en ligne, galerie immersive et réservation directe via WhatsApp.</p>
+            <div class="project-tech">
+              <span>HTML/CSS/JS</span>
+              <span>Responsive</span>
+              <span>WhatsApp API</span>
             </div>
-            <a href="projects/zangalewe.html" class="project-link" target="_blank" rel="noopener">
-              Voir le projet
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
           </div>
         </article>
 
-        <!-- Projet 2 : BetMind Pro -->
+        <!-- Projet 2 -->
         <article class="project-card reveal reveal-delay-1">
-          <div class="project-thumbnail">
-            <div class="project-thumb-bg p-betmind" aria-hidden="true">🧠</div>
+          <div class="project-thumbnail p-betmind">
+            <div class="project-thumb-icon">🧠</div>
+            <div class="project-overlay">
+              <a href="projects/betmind-pro-v6-online.html" class="btn btn-primary btn-sm">Voir le projet</a>
+            </div>
           </div>
           <div class="project-body">
-            <div class="project-category">Application Web</div>
+            <span class="project-category">Application Web & IA</span>
             <h3 class="project-title">BetMind Pro</h3>
-            <p class="project-desc">
-              Plateforme d'analyse sportive et de prédiction de matchs avec IA.
-              Dashboard interactif, statistiques en temps réel, UX pensée pour les parieurs.
-            </p>
-            <div class="project-features" aria-label="Fonctionnalités">
-              <span class="feature-tag">Dashboard IA</span>
-              <span class="feature-tag">Stats temps réel</span>
-              <span class="feature-tag">Analyse prédictive</span>
-              <span class="feature-tag">UX moderne</span>
-              <span class="feature-tag">Dark mode</span>
+            <p class="project-desc">Plateforme d'analyse sportive avec dashboard interactif, statistiques en temps réel et analyse prédictive. UX pensée pour les parieurs exigeants.</p>
+            <div class="project-tech">
+              <span>Python</span>
+              <span>Dashboard IA</span>
+              <span>Temps réel</span>
             </div>
-            <a href="projects/betmind-pro-v6-online.html" class="project-link" target="_blank" rel="noopener">
-              Voir le projet
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
           </div>
         </article>
 
-        <!-- Projet 3 : E-commerce demo -->
+        <!-- Projet 3 -->
         <article class="project-card reveal reveal-delay-2">
-          <div class="project-thumbnail">
-            <div class="project-thumb-bg p-ecommerce" aria-hidden="true">🛒</div>
+          <div class="project-thumbnail p-ecommerce">
+            <div class="project-thumb-icon">🛒</div>
+            <div class="project-overlay">
+              <a href="projects/ecommerce-demo.html" class="btn btn-primary btn-sm">Voir le projet</a>
+            </div>
           </div>
           <div class="project-body">
-            <div class="project-category">Mini E-commerce</div>
+            <span class="project-category">E-commerce Léger</span>
             <h3 class="project-title">E-commerce Demo</h3>
-            <p class="project-desc">
-              Boutique en ligne légère : catalogue produits, panier d'achat,
-              commande via WhatsApp ou email. Simple, rapide, efficace.
-            </p>
-            <div class="project-features" aria-label="Fonctionnalités">
-              <span class="feature-tag">Catalogue produits</span>
-              <span class="feature-tag">Panier d'achat</span>
-              <span class="feature-tag">Commande WhatsApp</span>
-              <span class="feature-tag">Filtres produits</span>
-              <span class="feature-tag">Mobile-first</span>
+            <p class="project-desc">Boutique en ligne optimisée pour la conversion : catalogue produits, panier d'achat et finalisation de commande via WhatsApp. Simple, rapide, efficace.</p>
+            <div class="project-tech">
+              <span>Mobile-first</span>
+              <span>Filtres</span>
+              <span>Conversion</span>
             </div>
-            <a href="projects/ecommerce-demo.html" class="project-link" target="_blank" rel="noopener">
-              Voir le projet
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </a>
           </div>
         </article>
-
       </div>
     </div>
   </section>
 
-  <!-- ============ SERVICES ============ -->
-  <section id="services" aria-label="Services proposés">
+  <!-- ═══════════════ 5. SOLUTIONS IA & AUTOMATISATION ═══════════════ -->
+  <section id="ai-solutions" class="bg-alt">
     <div class="container">
-      <div class="services-header reveal">
-        <span class="section-label">Services</span>
-        <h2 class="section-title">Ce que je fais pour vous</h2>
-        <p class="section-sub">Des solutions adaptées à vos besoins et à votre budget.</p>
+      <div class="ai-grid">
+        <div class="ai-content reveal">
+          <span class="section-label">Innovation</span>
+          <h2 class="section-title">L'IA et l'automatisation au service de votre productivité</h2>
+          <p class="section-sub">
+            Ne laissez plus les tâches répétitives ralentir votre croissance. Nous déployons des solutions intelligentes qui travaillent 24h/24 pour qualifier vos leads, répondre à vos clients et synchroniser vos données.
+          </p>
+          <ul class="ai-features">
+            <li>
+              <span class="ai-check">✓</span>
+              <div>
+                <strong>Agents IA personnalisés</strong>
+                <p>Des assistants intelligents adaptés à votre secteur d'activité.</p>
+              </div>
+            </li>
+            <li>
+              <span class="ai-check">✓</span>
+              <div>
+                <strong>Bots WhatsApp Business</strong>
+                <p>Réponses automatiques, qualification de leads et prise de rendez-vous.</p>
+              </div>
+            </li>
+            <li>
+              <span class="ai-check">✓</span>
+              <div>
+                <strong>Automatisation des workflows</strong>
+                <p>Connectez vos outils et éliminez les tâches manuelles chronophages.</p>
+              </div>
+            </li>
+          </ul>
+          <a href="#contact" class="btn btn-primary" style="margin-top:2rem;">Automatiser mon activité</a>
+        </div>
+        <div class="ai-visual reveal reveal-delay-1">
+          <div class="ai-chat-mockup">
+            <div class="ai-chat-header">
+              <div class="ai-avatar">🤖</div>
+              <div>
+                <div class="ai-name">Assistant HackSam</div>
+                <div class="ai-status">En ligne</div>
+              </div>
+            </div>
+            <div class="ai-chat-body">
+              <div class="ai-msg bot">Bonjour 👋 Comment puis-je vous aider aujourd'hui ?</div>
+              <div class="ai-msg user">Je souhaite automatiser mes prises de rendez-vous.</div>
+              <div class="ai-msg bot">Parfait ! Je peux connecter votre calendrier et gérer les réservations automatiquement. Souhaitez-vous une démo ?</div>
+              <div class="ai-msg user">Oui, c'est exactement ce qu'il me faut !</div>
+            </div>
+            <div class="ai-chat-input">
+              <span>Tapez votre message...</span>
+              <span class="ai-send">➤</span>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <div class="services-grid">
-        <div class="service-card reveal">
-          <div class="service-icon" aria-hidden="true">🌐</div>
-          <h4>Site Vitrine Professionnel</h4>
-          <p>Présentez votre activité avec un site moderne qui inspire confiance et attire vos clients idéaux.</p>
-        </div>
-        <div class="service-card reveal reveal-delay-1">
-          <div class="service-icon" aria-hidden="true">🛍️</div>
-          <h4>Boutique En Ligne</h4>
-          <p>Vendez vos produits 24h/24 avec une boutique simple, rapide et facile à gérer.</p>
-        </div>
-        <div class="service-card reveal reveal-delay-2">
-          <div class="service-icon" aria-hidden="true">📈</div>
-          <h4>Visibilité en Ligne</h4>
-          <p>Optimisation SEO, Google My Business, pour que vos clients vous trouvent facilement.</p>
-        </div>
-        <div class="service-card reveal reveal-delay-3">
-          <div class="service-icon" aria-hidden="true">💬</div>
-          <h4>Intégration WhatsApp</h4>
-          <p>Bouton WhatsApp, chat en direct et formulaires reliés à votre numéro pour convertir plus vite.</p>
-        </div>
-      </div>
-
-      <!-- WhatsApp CTA Banner -->
-      <div class="wa-banner reveal">
-        <div class="wa-banner-text">
-          <h3>Un projet en tête ? Parlons-en maintenant.</h3>
-          <p>Réponse garantie en moins de 2h. Devis gratuit et sans engagement.</p>
-        </div>
-        <a href="https://wa.me/237657150570?text=Bonjour%20Samy%2C%20je%20voudrais%20discuter%20d%27un%20projet%20web."
-           target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-          </svg>
-          Discuter sur WhatsApp
-        </a>
-      </div>
-
     </div>
   </section>
 
-  <!-- ============ CONTACT ============ -->
-  <section id="contact" aria-label="Contact">
+  <!-- ═══════════════ 6. POURQUOI HACKSAM ═══════════════ -->
+  <section id="why-us">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Nos Engagements</span>
+        <h2 class="section-title">Pourquoi choisir HackSam ?</h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-card reveal">
+          <div class="why-num">01</div>
+          <h4>Qualité sans compromis</h4>
+          <p>Code propre, tests rigoureux et respect des meilleures pratiques de l'industrie.</p>
+        </div>
+        <div class="why-card reveal reveal-delay-1">
+          <div class="why-num">02</div>
+          <h4>Innovation constante</h4>
+          <p>Intégration des dernières technologies (IA, automatisation) pour vous donner un avantage concurrentiel.</p>
+        </div>
+        <div class="why-card reveal reveal-delay-2">
+          <div class="why-num">03</div>
+          <h4>Rapidité d'exécution</h4>
+          <p>Méthodologie agile, livraisons dans les délais et communication transparente à chaque étape.</p>
+        </div>
+        <div class="why-card reveal reveal-delay-3">
+          <div class="why-num">04</div>
+          <h4>Solutions sur mesure</h4>
+          <p>Pas de template générique. Chaque projet est conçu autour de vos besoins spécifiques.</p>
+        </div>
+        <div class="why-card reveal">
+          <div class="why-num">05</div>
+          <h4>Accompagnement dédié</h4>
+          <p>Un interlocuteur unique, de la conception à la livraison, et au-delà.</p>
+        </div>
+        <div class="why-card reveal reveal-delay-1">
+          <div class="why-num">06</div>
+          <h4>Support technique continu</h4>
+          <p>Maintenance, mises à jour et évolutions pour que votre solution reste performante.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ 7. PROCESSUS ═══════════════ -->
+  <section id="process" class="bg-alt">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Méthodologie</span>
+        <h2 class="section-title">Notre processus de travail</h2>
+        <p class="section-sub">Une approche structurée et transparente, de l'idée à la mise en production.</p>
+      </div>
+      <div class="process-timeline reveal">
+        <div class="process-step">
+          <div class="step-marker">01</div>
+          <h4>Analyse</h4>
+          <p>Compréhension de vos objectifs, audit des besoins et définition du périmètre.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-marker">02</div>
+          <h4>Conception</h4>
+          <p>Maquettage UX/UI, validation de l'architecture et du parcours utilisateur.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-marker">03</div>
+          <h4>Développement</h4>
+          <p>Codage propre, intégration des fonctionnalités et itérations rapides.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-marker">04</div>
+          <h4>Tests</h4>
+          <p>Validation cross-browser, tests mobiles, performance et sécurité.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-marker">05</div>
+          <h4>Livraison</h4>
+          <p>Déploiement, formation à l'utilisation et mise en production.</p>
+        </div>
+        <div class="process-step">
+          <div class="step-marker">06</div>
+          <h4>Maintenance</h4>
+          <p>Support technique, mises à jour régulières et évolutions futures.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ 8. CTA ═══════════════ -->
+  <section id="cta">
+    <div class="container">
+      <div class="cta-box reveal">
+        <h2>Vous avez une idée ?<br>Transformons-la en solution digitale.</h2>
+        <p>Obtenez un devis gratuit et sans engagement. Réponse garantie en moins de 2h.</p>
+        <div class="cta-actions">
+          <a href="https://wa.me/237657150570?text=Bonjour%20HackSam%2C%20je%20voudrais%20discuter%20d%27un%20projet%20digital." class="btn btn-primary btn-lg" target="_blank" rel="noopener">
+            Parlons de votre projet
+          </a>
+          <a href="#contact" class="btn btn-outline btn-lg">Envoyer un message</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ 9. CONTACT ═══════════════ -->
+  <section id="contact">
     <div class="container">
       <div class="contact-wrap">
-
-        <!-- Info -->
-        <div class="reveal">
+        <div class="contact-info reveal">
           <span class="section-label">Contact</span>
-          <h2 class="section-title" style="font-size:clamp(1.8rem,3vw,2.5rem);">Démarrons votre projet</h2>
-          <p>Vous avez un projet ? Une idée ? Une question ? Je suis là pour vous aider.</p>
+          <h2 class="section-title">Démarrons votre projet</h2>
+          <p class="section-sub">Une question ? Un besoin spécifique ? Notre équipe est à votre écoute pour vous orienter vers la meilleure solution.</p>
 
-          <div class="contact-channels" role="list">
-            <a href="https://wa.me/237657150570" target="_blank" rel="noopener noreferrer" class="channel-item" role="listitem">
-              <div class="channel-icon" aria-hidden="true">💬</div>
+          <div class="contact-channels">
+            <a href="https://wa.me/237657150570" class="channel-item" target="_blank" rel="noopener">
+              <div class="channel-icon">💬</div>
               <div>
                 <div class="channel-label">WhatsApp</div>
-                <div class="channel-value">+237 657 150 570</div>
+                <div class="channel-value">+237 657 15 05 70</div>
               </div>
             </a>
-            <a href="mailto:samyviery@gmail.com" class="channel-item" role="listitem">
-              <div class="channel-icon" aria-hidden="true">✉️</div>
+            <a href="mailto:hacksamviery@gmail.com" class="channel-item">
+              <div class="channel-icon">✉️</div>
               <div>
                 <div class="channel-label">Email</div>
-                <div class="channel-value">samyviery@gmail.com</div>
+                <div class="channel-value">hacksamviery@gmail.com</div>
               </div>
             </a>
-            <a href="https://github.com/samymichel-bit" target="_blank" rel="noopener noreferrer" class="channel-item" role="listitem">
-              <div class="channel-icon" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
-              </div>
+            <div class="channel-item">
+              <div class="channel-icon">📍</div>
               <div>
-                <div class="channel-label">GitHub</div>
-                <div class="channel-value">github.com/samymichel-bit</div>
+                <div class="channel-label">Localisation</div>
+                <div class="channel-value">Yaoundé, Cameroun</div>
               </div>
-            </a>
+            </div>
           </div>
         </div>
 
-        <!-- Form -->
-        <div class="contact-form reveal reveal-delay-1">
-          <h4>Envoyer un message</h4>
-          <div id="contact-form-wrap">
+        <div class="contact-form-wrap reveal reveal-delay-1" id="contact-form-wrap">
+          <form class="contact-form" id="contactForm">
+            <h4>Envoyer un message</h4>
             <div class="form-row">
               <div class="form-group">
-                <label for="fname">Prénom</label>
-                <input type="text" id="fname" name="fname" placeholder="Atangana" autocomplete="given-name" required />
+                <label for="fname">Prénom *</label>
+                <input type="text" id="fname" name="fname" required placeholder="Votre prénom">
               </div>
               <div class="form-group">
                 <label for="lname">Nom</label>
-                <input type="text" id="lname" name="lname" placeholder="Joseph" autocomplete="family-name" />
+                <input type="text" id="lname" name="lname" placeholder="Votre nom">
               </div>
             </div>
             <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" placeholder="atangana@exemple.com" autocomplete="email" required />
+              <label for="email">Email *</label>
+              <input type="email" id="email" name="email" required placeholder="votre@email.com">
             </div>
             <div class="form-group">
               <label for="service">Service souhaité</label>
               <select id="service" name="service">
                 <option value="">Choisir un service...</option>
-                <option value="vitrine">Site vitrine professionnel</option>
-                <option value="ecommerce">Boutique en ligne</option>
-                <option value="seo">Optimisation visibilité</option>
-                <option value="whatsapp">Intégration WhatsApp</option>
-                <option value="autre">Autre</option>
+                <option value="Site vitrine professionnel">Site vitrine professionnel</option>
+                <option value="Application web">Application web</option>
+                <option value="Application mobile">Application mobile (Android/iOS)</option>
+                <option value="Solutions IA & Automatisation">Solutions IA & Automatisation</option>
+                <option value="Bot WhatsApp Business">Bot WhatsApp Business</option>
+                <option value="Logiciel sur mesure">Logiciel sur mesure</option>
+                <option value="Refonte de site">Refonte de site existant</option>
+                <option value="Hébergement & Domaine">Hébergement & Nom de domaine</option>
+                <option value="Autre">Autre demande</option>
               </select>
             </div>
             <div class="form-group">
-              <label for="message">Message</label>
-              <textarea id="message" name="message" placeholder="Décrivez votre projet en quelques mots..." required></textarea>
+              <label for="message">Message *</label>
+              <textarea id="message" name="message" required placeholder="Décrivez brièvement votre projet, vos objectifs et vos délais..."></textarea>
             </div>
             <button type="button" class="btn btn-primary form-submit" onclick="handleSubmit()">
               Envoyer le message
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
             </button>
+          </form>
+          <div class="form-alert" id="form-alert">
+            ❌ Erreur lors de l'envoi. Veuillez réessayer ou nous contacter directement par
+            <a href="https://wa.me/237657150570" target="_blank" rel="noopener">WhatsApp</a>.
           </div>
-          <div id="form-success" role="alert" aria-live="polite">
-            ✅ Merci ! Je vous répondrai dans les plus brefs délais.
+          <div id="form-success">
+            ✅ Merci ! Votre message a été envoyé avec succès. Nous vous répondrons dans les plus brefs délais.
           </div>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- ============ FOOTER ============ -->
-  <footer role="contentinfo">
+  <!-- ═══════════════ FOOTER ═══════════════ -->
+  <footer>
     <div class="container footer-inner">
-      <div class="footer-logo">Hack<span>Sam</span></div>
-      <ul class="footer-nav" role="list">
+      <div class="footer-brand">
+        <div class="footer-logo">Hack<span>Sam</span></div>
+        <p class="footer-tagline">Solutions digitales, IA & Automatisation.</p>
+      </div>
+      <ul class="footer-nav">
         <li><a href="#about">À propos</a></li>
-        <li><a href="#projects">Projets</a></li>
-        <li><a href="#services">Services</a></li>
+        <li><a href="#competences">Expertise</a></li>
+        <li><a href="#projects">Réalisations</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
-      <div class="footer-copy">© 2025 Samy Michel · Fait avec ❤️ au Cameroun 🇨🇲</div>
+      <div class="footer-copy">© 2025 HackSam Digital Solutions. Tous droits réservés.</div>
     </div>
   </footer>
 
-  <!-- Script -->
-  <script src="script.js"></script>
-
+  <script src="script.js" defer></script>
 </body>
 </html>

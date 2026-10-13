@@ -1,32 +1,20 @@
 /**
- * HackSam Portfolio — script.js
- * Auteur : Samy Michel
- *
- * Sections :
- *   1. Navbar scroll effect
- *   2. Mobile nav toggle
- *   3. Scroll reveal (IntersectionObserver)
- *   4. Active nav link on scroll
- *   5. Contact form handler
+ * HackSam Digital Solutions — script.js
+ * Fonctionnalités : Navbar scroll, Mobile nav, Scroll reveal,
+ * Active nav link, Smooth scroll, Back to top, Contact form (Web3Forms)
  */
-
 (function () {
   'use strict';
 
-  /* ──────────────────────────────────────────────
-     1. NAVBAR SCROLL EFFECT
-  ────────────────────────────────────────────── */
+  /* ═══════════════ 1. NAVBAR SCROLL EFFECT ═══════════════ */
   const navbar = document.getElementById('navbar');
-
   if (navbar) {
     window.addEventListener('scroll', () => {
       navbar.classList.toggle('scrolled', window.scrollY > 30);
     }, { passive: true });
   }
 
-  /* ──────────────────────────────────────────────
-     2. MOBILE NAV TOGGLE
-  ────────────────────────────────────────────── */
+  /* ═══════════════ 2. MOBILE NAV TOGGLE ═══════════════ */
   const navToggle = document.getElementById('navToggle');
   const mobileNav = document.getElementById('mobileNav');
 
@@ -46,27 +34,20 @@
       navToggle.setAttribute('aria-expanded', String(isOpen));
     });
 
-    // Close mobile nav when a link is tapped
     mobileNav.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', closeMobile);
     });
 
-    // Close on Escape key
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape' && mobileNav.classList.contains('open')) {
         closeMobile();
       }
     });
   }
-
-  // Expose for inline onclick fallback (legacy support)
   window.closeMobile = closeMobile;
 
-  /* ──────────────────────────────────────────────
-     3. SCROLL REVEAL (IntersectionObserver)
-  ────────────────────────────────────────────── */
+  /* ═══════════════ 3. SCROLL REVEAL ═══════════════ */
   const revealElements = document.querySelectorAll('.reveal');
-
   if ('IntersectionObserver' in window) {
     const revealObserver = new IntersectionObserver(
       (entries) => {
@@ -77,107 +58,108 @@
           }
         });
       },
-      { threshold: 0.12 }
+      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
     );
-
     revealElements.forEach(el => revealObserver.observe(el));
   } else {
-    // Fallback for older browsers
     revealElements.forEach(el => el.classList.add('visible'));
   }
 
-  /* ──────────────────────────────────────────────
-     4. ACTIVE NAV LINK ON SCROLL
-  ────────────────────────────────────────────── */
-  const sections   = document.querySelectorAll('section[id]');
+  /* ═══════════════ 4. ACTIVE NAV LINK ON SCROLL ═══════════════ */
+  const sections = document.querySelectorAll('section[id]');
   const navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
 
   function updateActiveNav() {
     let currentId = '';
     sections.forEach(sec => {
-      if (window.scrollY >= sec.offsetTop - 140) {
+      if (window.scrollY >= sec.offsetTop - 160) {
         currentId = sec.id;
       }
     });
-
-  navAnchors.forEach(a => {
+    navAnchors.forEach(a => {
       const isActive = a.getAttribute('href') === '#' + currentId;
       a.classList.toggle('active', isActive);
     });
   }
 
   if (sections.length && navAnchors.length) {
-    window.addEventListener('scroll', debounce(updateActiveNav, 10), { passive: true });
+    window.addEventListener('scroll', debounce(updateActiveNav, 15), { passive: true });
   }
 
-  /* ──────────────────────────────────────────────
-     6. SMOOTH SCROLLING
-  ────────────────────────────────────────────── */
+  /* ═══════════════ 5. SMOOTH SCROLLING ═══════════════ */
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       const targetId = this.getAttribute('href');
+      if (targetId === '#') return;
       const target = document.querySelector(targetId);
-      
       if (target) {
         e.preventDefault();
-        target.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
-        });
-        // Close mobile nav if open
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         closeMobile();
       }
     });
   });
 
-  /* ──────────────────────────────────────────────
-     7. BACK TO TOP BUTTON
-  ────────────────────────────────────────────── */
+  /* ═══════════════ 6. BACK TO TOP ═══════════════ */
   let backToTopBtn = document.querySelector('.back-to-top');
   if (!backToTopBtn) {
     backToTopBtn = document.createElement('button');
     backToTopBtn.className = 'back-to-top';
     backToTopBtn.innerHTML = '↑';
     backToTopBtn.setAttribute('aria-label', 'Retour en haut');
-    backToTopBtn.setAttribute('title', 'Retour en haut de page');
     document.body.appendChild(backToTopBtn);
   }
-
   backToTopBtn.addEventListener('click', () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
-
   window.addEventListener('scroll', debounce(() => {
-    backToTopBtn.classList.toggle('visible', window.scrollY > 400);
+    backToTopBtn.classList.toggle('visible', window.scrollY > 500);
   }, 10), { passive: true });
 
-  // Debounce utility
-  function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-      const later = () => {
-        clearTimeout(timeout);
-        func(...args);
-      };
-      clearTimeout(timeout);
-      timeout = setTimeout(later, wait);
-    };
+  /* ═══════════════ 7. CONTACT FORM (Web3Forms) ═══════════════ */
+  const submitBtn = document.querySelector('.form-submit');
+  const formWrap = document.getElementById('contact-form-wrap');
+  const formSuccess = document.getElementById('form-success');
+
+  /* ── Inline form validation helpers ── */
+  function setFieldError(field, message) {
+    if (!field) return;
+    const group = field.closest('.form-group');
+    if (!group) return;
+    field.classList.add('input-error');
+    let errorEl = group.querySelector('.field-error');
+    if (!errorEl) {
+      errorEl = document.createElement('span');
+      errorEl.className = 'field-error';
+      group.appendChild(errorEl);
+    }
+    errorEl.textContent = message;
   }
 
-  /* ──────────────────────────────────────────────
-     5. CONTACT FORM HANDLER
-  ────────────────────────────────────────────── */
-  const submitBtn  = document.querySelector('.form-submit');
-  const formWrap   = document.getElementById('contact-form-wrap');
-  const formSuccess = document.getElementById('form-success');
+  function clearFieldError(field) {
+    if (!field) return;
+    field.classList.remove('input-error');
+    const group = field.closest('.form-group');
+    if (group) {
+      const errorEl = group.querySelector('.field-error');
+      if (errorEl) errorEl.remove();
+    }
+  }
+
+  function validateField(field, validator) {
+    if (!field) return true;
+    clearFieldError(field);
+    const message = validator(field.value.trim());
+    if (message) {
+      setFieldError(field, message);
+      return false;
+    }
+    return true;
+  }
 
   async function handleSubmit() {
     if (!formWrap || !formSuccess || !submitBtn) return;
 
-    // Get all form fields
     const fname = document.getElementById('fname');
     const lname = document.getElementById('lname');
     const email = document.getElementById('email');
@@ -186,31 +168,60 @@
 
     if (!fname || !email || !message) return;
 
+    let isValid = true;
+    isValid = validateField(fname, v => {
+      if (!v) return 'Veuillez saisir votre prénom.';
+      if (v.length < 2) return 'Le prénom doit contenir au moins 2 caractères.';
+      return '';
+    }) && isValid;
+
+    if (lname) {
+      isValid = validateField(lname, v => {
+        if (v && v.length < 2) return 'Le nom doit contenir au moins 2 caractères.';
+        return '';
+      }) && isValid;
+    }
+
+    isValid = validateField(email, v => {
+      if (!v) return 'Veuillez saisir votre adresse email.';
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+      if (!emailRegex.test(v)) return 'Veuillez entrer une adresse email valide.';
+      return '';
+    }) && isValid;
+
+    isValid = validateField(message, v => {
+      if (!v) return 'Veuillez décrire votre projet.';
+      if (v.length < 10) return 'Votre message doit contenir au moins 10 caractères.';
+      return '';
+    }) && isValid;
+
+    if (!isValid) {
+      const firstError = formWrap.querySelector('.input-error');
+      if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
     const fnameVal = fname.value.trim();
     const lnameVal = lname ? lname.value.trim() : '';
     const emailVal = email.value.trim();
     const serviceVal = service ? service.value : '';
     const messageVal = message.value.trim();
 
-    // Enhanced validation
-    if (!fnameVal || !emailVal || !messageVal) {
-      alert('Veuillez remplir les champs obligatoires: prénom, email et message.');
-      return;
-    }
+    // Real-time validation clear on input
+    [fname, lname, email, message].forEach(field => {
+      if (field) {
+        field.addEventListener('input', () => clearFieldError(field), { once: true });
+      }
+    });
 
-  
-    if (!emailVal.includes('@')) {
-      alert('Veuillez entrer une adresse email valide.');
-      return;
-    }
-
-    // Set loading state
     submitBtn.disabled = true;
-    submitBtn.innerHTML = 'Envoi... <span class="spinner"></span>';
+    submitBtn.innerHTML = '<span style="display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,0.3);border-top-color:#fff;border-radius:50%;animation:spin 0.6s linear infinite;"></span> Envoi en cours...';
 
     const accessKey = 'ef1d518a-732f-43cc-b7b3-8a5c2b207ad2';
-    const subject = serviceVal ? `Nouveau message - ${serviceVal.charAt(0).toUpperCase() + serviceVal.slice(1)}` : 'Nouveau message depuis le portfolio';
-    
+    const subject = serviceVal
+      ? `Nouveau projet HackSam : ${serviceVal}`
+      : 'Nouveau message depuis le site HackSam';
+
     const formData = {
       access_key: accessKey,
       name: `${fnameVal} ${lnameVal}`.trim(),
@@ -228,9 +239,8 @@
       });
 
       if (response.ok) {
-        formWrap.style.display = 'none';
+        formWrap.querySelector('.contact-form').style.display = 'none';
         formSuccess.style.display = 'block';
-        // Reset form
         if (fname) fname.value = '';
         if (lname) lname.value = '';
         if (email) email.value = '';
@@ -240,20 +250,34 @@
         throw new Error('Erreur serveur');
       }
     } catch (error) {
-      alert('Erreur lors de l\'envoi. Veuillez réessayer ou me contacter par WhatsApp.');
+      const formAlert = formWrap.querySelector('.form-alert');
+      if (formAlert) {
+        formAlert.style.display = 'block';
+        setTimeout(() => { formAlert.style.display = 'none'; }, 5000);
+      }
       console.error('Form error:', error);
     } finally {
-      // Reset button
       submitBtn.disabled = false;
-      submitBtn.innerHTML = 'Envoyer le message\\n              <svg width=\\"16\\" height=\\"16\\" viewBox=\\"0 0 24 24\\" fill=\\"none\\" stroke=\\"currentColor\\" stroke-width=\\"2.5\\" aria-hidden=\\"true\\"><path d=\\"M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z\\"/></svg>';
+      submitBtn.innerHTML = 'Envoyer le message <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>';
     }
   }
 
-  // Expose for the inline onclick on the button
   window.handleSubmit = handleSubmit;
-
   if (submitBtn) {
     submitBtn.addEventListener('click', handleSubmit);
+  }
+
+  /* ═══════════════ UTILITY: DEBOUNCE ═══════════════ */
+  function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+      clearTimeout(timeout);
+      timeout = setTimeout(later, wait);
+    };
   }
 
 })();
